@@ -8,6 +8,19 @@
 </template>
 
 <style>
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -17,15 +30,15 @@
 }
 
 nav {
-  padding: 30px;
+    padding: 30px;
 }
 
 nav a {
-  font-weight: bold;
-  color: #2c3e50;
+    font-weight: bold;
+    color: #2c3e50;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+    color: #42b983;
 }
 </style>
