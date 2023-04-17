@@ -2,8 +2,8 @@
     <h1>Game page</h1>
     <main class="main__wrapper">
         <div class="main__infobox">
-            <p id="infobox__time">Time Remaining: 10:00</p>
-            <a href="#" class="button" id="infobox__end">End game</a>
+            <p class="infobox__timer">Time remaining: {{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</p>
+            <a href="#" v-on:click="endGame" class="button" id="infobox__end">End game</a>
         </div>
         <div class="main__decks">
             <div class="decks__deck decks_deck1">
@@ -315,7 +315,41 @@
 </template>
 
 <script>
+export default {
+  data() {
+    return {
+      durationInSeconds: 180,
+      timeRemaining: 0,
+      timerInterval: null,
+    };
+  },
 
+  computed: {
+    minutes() {
+      return Math.floor(this.timeRemaining / 60);
+    },
+    seconds() {
+      return this.timeRemaining % 60;
+    },
+  },
+
+  mounted() {
+    this.timeRemaining = this.durationInSeconds;
+    this.timerInterval = setInterval(this.updateTimer, 1000);
+  },
+
+  methods: {
+    updateTimer() {
+      this.timeRemaining--;
+      if (this.timeRemaining == 0) {
+        clearInterval(this.timerInterval);
+      }
+    },
+    endGame() {
+      clearInterval(this.timerInterval);
+    },
+  }
+};
 </script>
 
 <style scoped>
