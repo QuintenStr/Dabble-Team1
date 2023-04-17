@@ -10,10 +10,6 @@
 <script>
 
 </script>
-<<<<<<< Updated upstream
-  
-<style></style>
-=======
 
 <style scoped>
 body {
@@ -45,4 +41,3 @@ h1 {
   background-color: #FDFDBE;
 }
 </style>
->>>>>>> Stashed changes
