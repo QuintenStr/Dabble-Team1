@@ -1,9 +1,9 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/game">Game</router-link>
     <router-link to="/settings">Rules</router-link>
-  </nav>
+  </nav> -->
   <router-view/>
 </template>
 
