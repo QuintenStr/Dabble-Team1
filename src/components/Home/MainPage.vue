@@ -17,27 +17,35 @@
 .body {
     background-color: #B9E9FC;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-h1 {
+/* h1 {
     text-align: center;
     font-size: 90px;
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     color: #B2B0FF;
-}
+    margin-left: auto;
+    margin-right: auto;
+} */
 
 #buttons {
     align-items: center;
     display: flex;
     flex-direction: column;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .button {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     padding: 10px;
     font-size: 30px;
     background-color: #C9FFD5;
     border-radius: 5px;
+    border-color: black;
+    width: 300px;
 }
 
 .button:hover {

@@ -1,6 +1,6 @@
 <template>
     <div class="rules-page">
-        <h1>RULES</h1>
+        <h1>Rules</h1>
         <div id="border">
             <p>
                 <span>- 2-4 spelers.</span><br>
@@ -38,12 +38,12 @@
     height: 100%;
 }
 
-h1 {
+/* h1 {
     text-align: center;
     font-size: 90px;
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     color: #B2B0FF;
-}
+} */
 
 #border {
     background-color: #B2B0FF;
