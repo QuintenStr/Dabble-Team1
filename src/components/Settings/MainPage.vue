@@ -1,10 +1,8 @@
 <template>
     <div id="rules">
-    <h1>Dabble</h1>
-    <h2>The Game Rules</h2>
+        <h1>Dabble</h1>
+        <h2>The Game Rules</h2>
 
-
-    
         Each player's goal is to create one 2 letter word, one 3 letter word, one 4 letter word,
         one 5 letter word and one 6 letter word from 20 selected tiles before the timer runs out.Each player picks 20
         tiles from the bag without looking at them.As you pick your tiles, place them face down in front of you.Once all
@@ -21,6 +19,7 @@
         If one player created 5 words without exchanging tiles, he/she wins the round and gets
         the total points of the other player's unused tiles (letters not used in a word on their
         rack) as his/her score for this round. The other player(s) get 0 points for this round.
+
 
         <h3>WHAT TO DO WHEN MORE THAN ONE PLAYER WINS THE ROUND:</h3>
         If more than one player has created 5 words without exchanging tiles, then each
@@ -75,14 +74,14 @@
 <style>
 #rules {
     background-color: #B8E8FC;
-    color:black;
+    color: black;
     text-align: left;
-    background: rgb(0,194,255);
-background: linear-gradient(90deg, rgba(0,194,255,1) 100%, rgba(0,194,255,1) 100%);
+    background:#C8FFD4;
+    
     padding-left: 3%;
 }
+
 h1 {
     text-align: center;
 }
-
 </style>
