@@ -2,12 +2,9 @@
     <div class="body">
         <h1>Dabble</h1>
         <div id="buttons">
-            <!-- <button class="button" id="button1">New game</button>
-            <button class="button" id="button2">How to play</button>
-            <button class="button" id="button3">Settings</button> -->
-            <router-link class="button" to="/">Home</router-link>
-            <router-link class="button" to="/game">Game</router-link>
-            <router-link class="button" to="/settings">Rules</router-link>
+            <router-link class="button" to="/game">New game</router-link>
+            <router-link class="button" to="/rules">How to play</router-link>
+            <router-link class="button" to="/settings">Settings</router-link>
         </div>
     </div>
 </template>
@@ -19,6 +16,7 @@
 <style scoped>
 .body {
     background-color: #B9E9FC;
+    height: 100%;
 }
 
 h1 {
