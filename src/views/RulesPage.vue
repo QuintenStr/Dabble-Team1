@@ -1,12 +1,12 @@
 <template>
-    <SettingsPage />
+    <RulesPage />
 </template>
   
 <script>
-import SettingsPage from '../components/Settings/MainPage.vue'
+import RulesPage from '../components/Rules/MainPage.vue'
 export default {
   components: {
-    SettingsPage,
+    RulesPage,
   }
 }
 </script>
