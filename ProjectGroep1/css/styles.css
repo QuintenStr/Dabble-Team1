@@ -9,11 +9,10 @@ h1 {
     color: #B2B0FF;
 }
 
-.buttons {
+#buttons {
     align-items: center;
     display: flex;
     flex-direction: column;
-    
 }
   
 .button {
