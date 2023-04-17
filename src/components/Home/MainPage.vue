@@ -1,9 +1,48 @@
 <template>
-    <h1>Home page</h1>
+    <div class="body">
+        <h1>Dabble</h1>
+        <div id="buttons">
+            <!-- <button class="button" id="button1">New game</button>
+            <button class="button" id="button2">How to play</button>
+            <button class="button" id="button3">Settings</button> -->
+            <router-link class="button" to="/">Home</router-link>
+            <router-link class="button" to="/game">Game</router-link>
+            <router-link class="button" to="/settings">Rules</router-link>
+        </div>
+    </div>
 </template>
-  
+
 <script>
 
 </script>
-  
-<style></style>
+
+<style scoped>
+.body {
+    background-color: #B9E9FC;
+}
+
+h1 {
+    text-align: center;
+    font-size: 90px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    color: #B2B0FF;
+}
+
+#buttons {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 30px;
+    background-color: #C9FFD5;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #FDFDBE;
+}
+</style>
