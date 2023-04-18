@@ -321,6 +321,120 @@ export default {
       durationInSeconds: 180,
       timeRemaining: 0,
       timerInterval: null,
+      chars: [
+      {
+        value: 'e',
+        score: 3,
+      },
+      {
+        value: 'a',
+        score: 3,
+      },
+      {
+        value: 'i',
+        score: 3,
+      },
+      {
+        value: 'o',
+        score: 3,
+      },
+      {
+        value: 'n',
+        score: 3,
+      },
+      {
+        value: 'r',
+        score: 3,
+      },
+      {
+        value: 't',
+        score: 3,
+      },
+      {
+        value: 'l',
+        score: 3,
+      },
+      {
+        value: 's',
+        score: 3,
+      },
+      {
+        value: 'u',
+        score: 3,
+      },
+      {
+        value: '',
+        score: 0,
+      },
+      {
+        value: 'd',
+        score: 6,
+      },
+      {
+        value: 'g',
+        score: 6,
+      },
+      {
+        value: 'b',
+        score: 9,
+      },
+      {
+        value: 'c',
+        score: 9,
+      },
+      {
+        value: 'm',
+        score: 9,
+      },
+      {
+        value: 'p',
+        score: 9,
+      },
+      {
+        value: 'f',
+        score: 12,
+      },
+      {
+        value: 'h',
+        score: 12,
+      },
+      {
+        value: 'v',
+        score: 12,
+      },
+      {
+        value: 'w',
+        score: 12,
+      },
+      {
+        value: 'y',
+        score: 12,
+      },
+      {
+        value: 'k',
+        score: 15,
+      },
+      {
+        value: 'j',
+        score: 24,
+      },
+      {
+        value: 'x',
+        score: 24,
+      },
+      {
+        value: 'q',
+        score: 30,
+      },
+      {
+        value: 'z',
+        score: 30,
+      },
+      {
+        value: "''",
+        score: 0,
+      }
+      ]
     };
   },
 
