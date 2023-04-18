@@ -81,4 +81,13 @@ nav a.router-link-exact-active {
 .button:hover {
   background-color: #FDFDBE;
 }
+/* Game > Stack */
+.stack__char {
+  background-color: #B1AFFF;
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+}
+
+
 </style>
