@@ -26,15 +26,19 @@
   margin-top: auto;
   margin-bottom: auto;
 }
+
 .button {
   margin-bottom: 30px;
   padding: 10px;
   font-size: 30px;
   background-color: #C9FFD5;
   border-radius: 5px;
-  border-color: black;
+  border: 2px solid black;
   width: 300px;
+  text-decoration: none;
+  color: black;
 }
+
 .button:hover {
   background-color: #FDFDBE;
 }
