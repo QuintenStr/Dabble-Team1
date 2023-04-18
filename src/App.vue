@@ -1,10 +1,5 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/game">Game</router-link>
-    <router-link to="/settings">Rules</router-link>
-  </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
@@ -27,18 +22,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 90px;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  color: #B2B0FF;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 nav {
-    padding: 30px;
+  padding: 30px;
 }
 
 nav a {
-    font-weight: bold;
-    color: #2c3e50;
+  font-weight: bold;
+  color: #2c3e50;
 }
 
 nav a.router-link-exact-active {
-    color: #42b983;
+  color: #42b983;
 }
 </style>
