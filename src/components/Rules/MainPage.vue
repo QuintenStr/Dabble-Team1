@@ -9,12 +9,9 @@
                 <span>- Kiezen in welke taal je gaat spelen voor begin van de spel. Je moet wel in 2 talen kunnen spelen
                     (NL/EN).</span><br>
                 <span>- Eerste die alle woorden heeft stopt de timer, dan stopt iedereen met het spel en telt iedereen zijn
-                    punten
-                    of als de timer op is, telt iedereen zijn punten ook op.</span><br>
+                    punten of als de timer op is, telt iedereen zijn punten ook op.</span><br>
                 <span>- Wanneer er geen winnaar is met 5 woorden, zal elke speler zijn overige woorden optellen en die som
-                    zal
-                    dan
-                    bij elke andere speler gaan.</span><br>
+                    zal dan bij elke andere speler gaan.</span><br>
                 <span>- Andere spelers kunnen jouw woorden zien.</span><br>
                 <span>- Woorden tegels: 142</span><br>
                 <span>- Blank tegels: 2</span><br>
@@ -37,13 +34,6 @@
     background-color: #B9E9FC;
     height: 100%;
 }
-
-/* h1 {
-    text-align: center;
-    font-size: 90px;
-    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-    color: #B2B0FF;
-} */
 
 #border {
     background-color: #B2B0FF;

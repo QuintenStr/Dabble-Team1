@@ -21,15 +21,6 @@
     flex-direction: column;
 }
 
-/* h1 {
-    text-align: center;
-    font-size: 90px;
-    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-    color: #B2B0FF;
-    margin-left: auto;
-    margin-right: auto;
-} */
-
 #buttons {
     align-items: center;
     display: flex;
