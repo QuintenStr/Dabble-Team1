@@ -1,6 +1,9 @@
 <template>
     <div class="rules-page">
         <h1>Rules</h1>
+        <div id="buttons">
+            <router-link class="button" to="/">Home</router-link>
+        </div>
         <div id="border">
             <p>
                 <span>- 2-4 spelers.</span><br>
@@ -25,12 +28,14 @@
 
 </script>
   
-<style>
+<style scoped>
+.button {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+}
+
 .rules-page {
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-    line-height: 1.5;
-    text-align: justify;
     background-color: #B9E9FC;
     height: 100%;
 }
@@ -43,6 +48,9 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     max-width: 800px;
     margin: 0 auto;
+    text-align: justify;
+    line-height: 1.3;
+    font-family: Arial, sans-serif;
 }
 
 p {
