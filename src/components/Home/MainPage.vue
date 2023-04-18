@@ -2,12 +2,9 @@
     <div class="body">
         <h1>Dabble</h1>
         <div id="buttons">
-            <!-- <button class="button" id="button1">New game</button>
-            <button class="button" id="button2">How to play</button>
-            <button class="button" id="button3">Settings</button> -->
-            <router-link class="button" to="/">Home</router-link>
-            <router-link class="button" to="/game">Game</router-link>
-            <router-link class="button" to="/settings">Rules</router-link>
+            <router-link class="button" to="/game">New game</router-link>
+            <router-link class="button" to="/rules">Rules</router-link>
+            <router-link class="button" to="/settings">Settings</router-link>
         </div>
     </div>
 </template>
@@ -19,27 +16,36 @@
 <style scoped>
 .body {
     background-color: #B9E9FC;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-h1 {
+/* h1 {
     text-align: center;
     font-size: 90px;
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     color: #B2B0FF;
-}
+    margin-left: auto;
+    margin-right: auto;
+} */
 
 #buttons {
     align-items: center;
     display: flex;
     flex-direction: column;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .button {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     padding: 10px;
     font-size: 30px;
     background-color: #C9FFD5;
     border-radius: 5px;
+    border-color: black;
+    width: 300px;
 }
 
 .button:hover {

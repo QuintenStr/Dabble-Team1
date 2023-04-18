@@ -1,9 +1,9 @@
 <template>
     <h1>Game page</h1>
-    <main class="main__wrapper">
+    <div class="main__wrapper"  v-if="!isGameEnded">
         <div class="main__infobox">
-            <p id="infobox__time">Time Remaining: 10:00</p>
-            <a href="#" class="button" id="infobox__end">End game</a>
+            <p class="infobox__timer">Time remaining: {{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</p>
+            <button v-on:click="isGameEnded = true">END GAME</button>
         </div>
         <div class="main__decks">
             <div class="decks__deck decks_deck1">
@@ -311,11 +311,164 @@
                 <p class="deck__stack">R A C K</p>
             </div>
         </div>
-    </main>
+    </div>
+    
+    <div>
+
+    </div>
 </template>
 
 <script>
+export default {
+  data() {
+    return {
+      durationInSeconds: 180,
+      timeRemaining: 0,
+      timerInterval: null,
+      isGameEnded: false,
+      chars: [
+      {
+        value: 'e',
+        score: 3,
+      },
+      {
+        value: 'a',
+        score: 3,
+      },
+      {
+        value: 'i',
+        score: 3,
+      },
+      {
+        value: 'o',
+        score: 3,
+      },
+      {
+        value: 'n',
+        score: 3,
+      },
+      {
+        value: 'r',
+        score: 3,
+      },
+      {
+        value: 't',
+        score: 3,
+      },
+      {
+        value: 'l',
+        score: 3,
+      },
+      {
+        value: 's',
+        score: 3,
+      },
+      {
+        value: 'u',
+        score: 3,
+      },
+      {
+        value: '',
+        score: 0,
+      },
+      {
+        value: 'd',
+        score: 6,
+      },
+      {
+        value: 'g',
+        score: 6,
+      },
+      {
+        value: 'b',
+        score: 9,
+      },
+      {
+        value: 'c',
+        score: 9,
+      },
+      {
+        value: 'm',
+        score: 9,
+      },
+      {
+        value: 'p',
+        score: 9,
+      },
+      {
+        value: 'f',
+        score: 12,
+      },
+      {
+        value: 'h',
+        score: 12,
+      },
+      {
+        value: 'v',
+        score: 12,
+      },
+      {
+        value: 'w',
+        score: 12,
+      },
+      {
+        value: 'y',
+        score: 12,
+      },
+      {
+        value: 'k',
+        score: 15,
+      },
+      {
+        value: 'j',
+        score: 24,
+      },
+      {
+        value: 'x',
+        score: 24,
+      },
+      {
+        value: 'q',
+        score: 30,
+      },
+      {
+        value: 'z',
+        score: 30,
+      },
+      {
+        value: "''",
+        score: 0,
+      }
+      ]
+    };
+  },
 
+  computed: {
+    minutes() {
+      return Math.floor(this.timeRemaining / 60);
+    },
+    seconds() {
+      return this.timeRemaining % 60;
+    },
+  },
+
+  mounted() {
+    this.timeRemaining = this.durationInSeconds;
+    this.timerInterval = setInterval(this.updateTimer, 1000);
+  },
+
+  methods: {
+    updateTimer() {
+      this.timeRemaining--;
+      if (this.timeRemaining == 0) {
+        clearInterval(this.timerInterval);
+      }
+    },
+    endGame() {
+      clearInterval(this.timerInterval);
+    },
+  }
+};
 </script>
 
 <style scoped>
