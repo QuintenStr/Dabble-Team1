@@ -1,549 +1,328 @@
 <template>
-    <h1>Game page</h1>
-    <div class="main__wrapper"  v-if="!isGameEnded">
-        <div class="main__infobox">
-            <p class="infobox__timer">Time remaining: {{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</p>
-            <button v-on:click="isGameEnded = true">END GAME</button>
-        </div>
-        <div class="main__decks">
-            <div class="decks__deck decks_deck1">
-                <p class="deck__player">player name</p>
-                <div class="deck__rack">
-                    <div class="rack__row">
-                        <div class="rack__col rack__11">
-                            11
-                        </div>
-                        <div class="rack__col rack__12">
-                            12
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__21">
-                            21
-                        </div>
-                        <div class="rack__col rack__22">
-                            23
-                        </div>
-                        <div class="rack__col rack__23">
-                            23
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__31">
-                            31
-                        </div>
-                        <div class="rack__col rack__32">
-                            32
-                        </div>
-                        <div class="rack__col rack__33">
-                            33
-                        </div>
-                        <div class="rack__col rack__34">
-                            34
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__41">
-                            41
-                        </div>
-                        <div class="rack__col rack__42">
-                            42
-                        </div>
-                        <div class="rack__col rack__43">
-                            43
-                        </div>
-                        <div class="rack__col rack__44">
-                            44
-                        </div>
-                        <div class="rack__col rack__45">
-                            45
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__51">
-                            51
-                        </div>
-                        <div class="rack__col rack__52">
-                            52
-                        </div>
-                        <div class="rack__col rack__53">
-                            53
-                        </div>
-                        <div class="rack__col rack__54">
-                            54
-                        </div>
-                        <div class="rack__col rack__55">
-                            55
-                        </div>
-                        <div class="rack__col rack__56">
-                            56
-                        </div>
-                    </div>
-                </div>
-                <p class="deck__stack">R A C K</p>
-            </div>
-            <div class="decks__deck decks_deck2">
-                <p class="deck__player">player name</p>
-                <div class="deck__rack">
-                    <div class="rack__row">
-                        <div class="rack__col rack__11">
-                            11
-                        </div>
-                        <div class="rack__col rack__12">
-                            12
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__21">
-                            21
-                        </div>
-                        <div class="rack__col rack__22">
-                            23
-                        </div>
-                        <div class="rack__col rack__23">
-                            23
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__31">
-                            31
-                        </div>
-                        <div class="rack__col rack__32">
-                            32
-                        </div>
-                        <div class="rack__col rack__33">
-                            33
-                        </div>
-                        <div class="rack__col rack__34">
-                            34
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__41">
-                            41
-                        </div>
-                        <div class="rack__col rack__42">
-                            42
-                        </div>
-                        <div class="rack__col rack__43">
-                            43
-                        </div>
-                        <div class="rack__col rack__44">
-                            44
-                        </div>
-                        <div class="rack__col rack__45">
-                            45
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__51">
-                            51
-                        </div>
-                        <div class="rack__col rack__52">
-                            52
-                        </div>
-                        <div class="rack__col rack__53">
-                            53
-                        </div>
-                        <div class="rack__col rack__54">
-                            54
-                        </div>
-                        <div class="rack__col rack__55">
-                            55
-                        </div>
-                        <div class="rack__col rack__56">
-                            56
-                        </div>
-                    </div>
-                </div>
-                <p class="deck__stack">R A C K</p>
-            </div>
-            <div class="decks__deck decks_deck3">
-                <p class="deck__player">player name</p>
-                <div class="deck__rack">
-                    <div class="rack__row">
-                        <div class="rack__col rack__11">
-                            11
-                        </div>
-                        <div class="rack__col rack__12">
-                            12
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__21">
-                            21
-                        </div>
-                        <div class="rack__col rack__22">
-                            23
-                        </div>
-                        <div class="rack__col rack__23">
-                            23
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__31">
-                            31
-                        </div>
-                        <div class="rack__col rack__32">
-                            32
-                        </div>
-                        <div class="rack__col rack__33">
-                            33
-                        </div>
-                        <div class="rack__col rack__34">
-                            34
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__41">
-                            41
-                        </div>
-                        <div class="rack__col rack__42">
-                            42
-                        </div>
-                        <div class="rack__col rack__43">
-                            43
-                        </div>
-                        <div class="rack__col rack__44">
-                            44
-                        </div>
-                        <div class="rack__col rack__45">
-                            45
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__51">
-                            51
-                        </div>
-                        <div class="rack__col rack__52">
-                            52
-                        </div>
-                        <div class="rack__col rack__53">
-                            53
-                        </div>
-                        <div class="rack__col rack__54">
-                            54
-                        </div>
-                        <div class="rack__col rack__55">
-                            55
-                        </div>
-                        <div class="rack__col rack__56">
-                            56
-                        </div>
-                    </div>
-                </div>
-                <p class="deck__stack">R A C K</p>
-            </div>
-            <div class="decks__deck decks_deck4">
-                <p class="deck__player">player name</p>
-                <div class="deck__rack">
-                    <div class="rack__row">
-                        <div class="rack__col rack__11">
-                            11
-                        </div>
-                        <div class="rack__col rack__12">
-                            12
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__21">
-                            21
-                        </div>
-                        <div class="rack__col rack__22">
-                            23
-                        </div>
-                        <div class="rack__col rack__23">
-                            23
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__31">
-                            31
-                        </div>
-                        <div class="rack__col rack__32">
-                            32
-                        </div>
-                        <div class="rack__col rack__33">
-                            33
-                        </div>
-                        <div class="rack__col rack__34">
-                            34
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__41">
-                            41
-                        </div>
-                        <div class="rack__col rack__42">
-                            42
-                        </div>
-                        <div class="rack__col rack__43">
-                            43
-                        </div>
-                        <div class="rack__col rack__44">
-                            44
-                        </div>
-                        <div class="rack__col rack__45">
-                            45
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__51">
-                            51
-                        </div>
-                        <div class="rack__col rack__52">
-                            52
-                        </div>
-                        <div class="rack__col rack__53">
-                            53
-                        </div>
-                        <div class="rack__col rack__54">
-                            54
-                        </div>
-                        <div class="rack__col rack__55">
-                            55
-                        </div>
-                        <div class="rack__col rack__56">
-                            56
-                        </div>
-                    </div>
-                </div>
-                <p class="deck__stack">R A C K</p>
-            </div>
-            <div class="decks__deck">
-                <p class="deck__player">player name</p>
-                <div class="deck__rack">
-                    <div class="rack__row">
-                        <div class="rack__col rack__11">
-                            11
-                        </div>
-                        <div class="rack__col rack__12">
-                            12
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__21">
-                            21
-                        </div>
-                        <div class="rack__col rack__22">
-                            23
-                        </div>
-                        <div class="rack__col rack__23">
-                            23
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__31">
-                            31
-                        </div>
-                        <div class="rack__col rack__32">
-                            32
-                        </div>
-                        <div class="rack__col rack__33">
-                            33
-                        </div>
-                        <div class="rack__col rack__34">
-                            34
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__41">
-                            41
-                        </div>
-                        <div class="rack__col rack__42">
-                            42
-                        </div>
-                        <div class="rack__col rack__43">
-                            43
-                        </div>
-                        <div class="rack__col rack__44">
-                            44
-                        </div>
-                        <div class="rack__col rack__45">
-                            45
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__51">
-                            51
-                        </div>
-                        <div class="rack__col rack__52">
-                            52
-                        </div>
-                        <div class="rack__col rack__53">
-                            53
-                        </div>
-                        <div class="rack__col rack__54">
-                            54
-                        </div>
-                        <div class="rack__col rack__55">
-                            55
-                        </div>
-                        <div class="rack__col rack__56">
-                            56
-                        </div>
-                    </div>
-                </div>
-                <p class="deck__stack">R A C K</p>
-            </div>
-            <div class="decks__deck">
-                <p class="deck__player">player name</p>
-                <div class="deck__rack">
-                    <div class="rack__row">
-                        <div class="rack__col rack__11">
-                            11
-                        </div>
-                        <div class="rack__col rack__12">
-                            12
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__21">
-                            21
-                        </div>
-                        <div class="rack__col rack__22">
-                            23
-                        </div>
-                        <div class="rack__col rack__23">
-                            23
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__31">
-                            31
-                        </div>
-                        <div class="rack__col rack__32">
-                            32
-                        </div>
-                        <div class="rack__col rack__33">
-                            33
-                        </div>
-                        <div class="rack__col rack__34">
-                            34
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__41">
-                            41
-                        </div>
-                        <div class="rack__col rack__42">
-                            42
-                        </div>
-                        <div class="rack__col rack__43">
-                            43
-                        </div>
-                        <div class="rack__col rack__44">
-                            44
-                        </div>
-                        <div class="rack__col rack__45">
-                            45
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__51">
-                            51
-                        </div>
-                        <div class="rack__col rack__52">
-                            52
-                        </div>
-                        <div class="rack__col rack__53">
-                            53
-                        </div>
-                        <div class="rack__col rack__54">
-                            54
-                        </div>
-                        <div class="rack__col rack__55">
-                            55
-                        </div>
-                        <div class="rack__col rack__56">
-                            56
-                        </div>
-                    </div>
-                </div>
-                <p class="deck__stack">R A C K</p>
-            </div>
-            <div class="decks__deck">
-                <p class="deck__player">player name</p>
-                <div class="deck__rack">
-                    <div class="rack__row">
-                        <div class="rack__col rack__11">
-                            11
-                        </div>
-                        <div class="rack__col rack__12">
-                            12
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__21">
-                            21
-                        </div>
-                        <div class="rack__col rack__22">
-                            23
-                        </div>
-                        <div class="rack__col rack__23">
-                            23
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__31">
-                            31
-                        </div>
-                        <div class="rack__col rack__32">
-                            32
-                        </div>
-                        <div class="rack__col rack__33">
-                            33
-                        </div>
-                        <div class="rack__col rack__34">
-                            34
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__41">
-                            41
-                        </div>
-                        <div class="rack__col rack__42">
-                            42
-                        </div>
-                        <div class="rack__col rack__43">
-                            43
-                        </div>
-                        <div class="rack__col rack__44">
-                            44
-                        </div>
-                        <div class="rack__col rack__45">
-                            45
-                        </div>
-                    </div>
-                    <div class="rack__row">
-                        <div class="rack__col rack__51">
-                            51
-                        </div>
-                        <div class="rack__col rack__52">
-                            52
-                        </div>
-                        <div class="rack__col rack__53">
-                            53
-                        </div>
-                        <div class="rack__col rack__54">
-                            54
-                        </div>
-                        <div class="rack__col rack__55">
-                            55
-                        </div>
-                        <div class="rack__col rack__56">
-                            56
-                        </div>
-                    </div>
-                </div>
-                <p class="deck__stack">R A C K</p>
-            </div>
-        </div>
+  <h1>Game page</h1>
+  <div class="main__wrapper" v-if="!isGameEnded">
+    <div class="main__infobox">
+      <p class="infobox__timer">Time remaining: {{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</p>
+      <button class="button" v-on:click="isGameEnded = true">END GAME</button>
     </div>
-    
-    <div>
+    <div class="main__decks">
+      <div class="decks__deck decks_deck1">
+        <p class="deck__player">player name</p>
+        <div class="deck__rack">
+          <div class="rack__row drop" ref="drop" @dragover.prevent @drop="dropChar">
+            <div class="rack__col rack__11">
+              11
+            </div>
+            <div class="rack__col rack__12">
+              12
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__21">
+              21
+            </div>
+            <div class="rack__col rack__22">
+              23
+            </div>
+            <div class="rack__col rack__23">
+              23
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__31">
+              31
+            </div>
+            <div class="rack__col rack__32">
+              32
+            </div>
+            <div class="rack__col rack__33">
+              33
+            </div>
+            <div class="rack__col rack__34">
+              34
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__41">
+              41
+            </div>
+            <div class="rack__col rack__42">
+              42
+            </div>
+            <div class="rack__col rack__43">
+              43
+            </div>
+            <div class="rack__col rack__44">
+              44
+            </div>
+            <div class="rack__col rack__45">
+              45
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__51">
+              51
+            </div>
+            <div class="rack__col rack__52">
+              52
+            </div>
+            <div class="rack__col rack__53">
+              53
+            </div>
+            <div class="rack__col rack__54">
+              54
+            </div>
+            <div class="rack__col rack__55">
+              55
+            </div>
+            <div class="rack__col rack__56">
+              56
+            </div>
+          </div>
+        </div>
+        <div class="deck__stack">
+          <div v-for="char in generateChars()" v-html="`${char.value}:${char.score}`" :id="`player1_${char.id}`" data-player="player1"
+            class="stack__char" :key="`player1_${char.id}`" :ref="`player1_${char.id}`" draggable="true"
+            @dragstart="dragChar"> </div>
+          <draggable tag="div">
 
+          </draggable>
+        </div>
+      </div>
+      <div class="decks__deck decks_deck2">
+        <p class="deck__player">player name</p>
+        <div class="deck__rack">
+          <div class="rack__row">
+            <div class="rack__col rack__11">
+              11
+            </div>
+            <div class="rack__col rack__12">
+              12
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__21">
+              21
+            </div>
+            <div class="rack__col rack__22">
+              23
+            </div>
+            <div class="rack__col rack__23">
+              23
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__31">
+              31
+            </div>
+            <div class="rack__col rack__32">
+              32
+            </div>
+            <div class="rack__col rack__33">
+              33
+            </div>
+            <div class="rack__col rack__34">
+              34
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__41">
+              41
+            </div>
+            <div class="rack__col rack__42">
+              42
+            </div>
+            <div class="rack__col rack__43">
+              43
+            </div>
+            <div class="rack__col rack__44">
+              44
+            </div>
+            <div class="rack__col rack__45">
+              45
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__51">
+              51
+            </div>
+            <div class="rack__col rack__52">
+              52
+            </div>
+            <div class="rack__col rack__53">
+              53
+            </div>
+            <div class="rack__col rack__54">
+              54
+            </div>
+            <div class="rack__col rack__55">
+              55
+            </div>
+            <div class="rack__col rack__56">
+              56
+            </div>
+          </div>
+        </div>
+        <p class="deck__stack">R A C K</p>
+      </div>
+      <div class="decks__deck decks_deck3">
+        <p class="deck__player">player name</p>
+        <div class="deck__rack">
+          <div class="rack__row">
+            <div class="rack__col rack__11">
+              11
+            </div>
+            <div class="rack__col rack__12">
+              12
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__21">
+              21
+            </div>
+            <div class="rack__col rack__22">
+              23
+            </div>
+            <div class="rack__col rack__23">
+              23
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__31">
+              31
+            </div>
+            <div class="rack__col rack__32">
+              32
+            </div>
+            <div class="rack__col rack__33">
+              33
+            </div>
+            <div class="rack__col rack__34">
+              34
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__41">
+              41
+            </div>
+            <div class="rack__col rack__42">
+              42
+            </div>
+            <div class="rack__col rack__43">
+              43
+            </div>
+            <div class="rack__col rack__44">
+              44
+            </div>
+            <div class="rack__col rack__45">
+              45
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__51">
+              51
+            </div>
+            <div class="rack__col rack__52">
+              52
+            </div>
+            <div class="rack__col rack__53">
+              53
+            </div>
+            <div class="rack__col rack__54">
+              54
+            </div>
+            <div class="rack__col rack__55">
+              55
+            </div>
+            <div class="rack__col rack__56">
+              56
+            </div>
+          </div>
+        </div>
+        <p class="deck__stack">R A C K</p>
+      </div>
+      <div class="decks__deck decks_deck4">
+        <p class="deck__player">player name</p>
+        <div class="deck__rack">
+          <div class="rack__row">
+            <div class="rack__col rack__11">
+              11
+            </div>
+            <div class="rack__col rack__12">
+              12
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__21">
+              21
+            </div>
+            <div class="rack__col rack__22">
+              23
+            </div>
+            <div class="rack__col rack__23">
+              23
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__31">
+              31
+            </div>
+            <div class="rack__col rack__32">
+              32
+            </div>
+            <div class="rack__col rack__33">
+              33
+            </div>
+            <div class="rack__col rack__34">
+              34
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__41">
+              41
+            </div>
+            <div class="rack__col rack__42">
+              42
+            </div>
+            <div class="rack__col rack__43">
+              43
+            </div>
+            <div class="rack__col rack__44">
+              44
+            </div>
+            <div class="rack__col rack__45">
+              45
+            </div>
+          </div>
+          <div class="rack__row">
+            <div class="rack__col rack__51">
+              51
+            </div>
+            <div class="rack__col rack__52">
+              52
+            </div>
+            <div class="rack__col rack__53">
+              53
+            </div>
+            <div class="rack__col rack__54">
+              54
+            </div>
+            <div class="rack__col rack__55">
+              55
+            </div>
+            <div class="rack__col rack__56">
+              56
+            </div>
+          </div>
+        </div>
+        <p class="deck__stack">R A C K</p>
+      </div>
     </div>
+  </div>
+
+  <div>
+
+  </div>
 </template>
 
 <script>
@@ -555,118 +334,118 @@ export default {
       timerInterval: null,
       isGameEnded: false,
       chars: [
-      {
-        value: 'e',
-        score: 3,
-      },
-      {
-        value: 'a',
-        score: 3,
-      },
-      {
-        value: 'i',
-        score: 3,
-      },
-      {
-        value: 'o',
-        score: 3,
-      },
-      {
-        value: 'n',
-        score: 3,
-      },
-      {
-        value: 'r',
-        score: 3,
-      },
-      {
-        value: 't',
-        score: 3,
-      },
-      {
-        value: 'l',
-        score: 3,
-      },
-      {
-        value: 's',
-        score: 3,
-      },
-      {
-        value: 'u',
-        score: 3,
-      },
-      {
-        value: '',
-        score: 0,
-      },
-      {
-        value: 'd',
-        score: 6,
-      },
-      {
-        value: 'g',
-        score: 6,
-      },
-      {
-        value: 'b',
-        score: 9,
-      },
-      {
-        value: 'c',
-        score: 9,
-      },
-      {
-        value: 'm',
-        score: 9,
-      },
-      {
-        value: 'p',
-        score: 9,
-      },
-      {
-        value: 'f',
-        score: 12,
-      },
-      {
-        value: 'h',
-        score: 12,
-      },
-      {
-        value: 'v',
-        score: 12,
-      },
-      {
-        value: 'w',
-        score: 12,
-      },
-      {
-        value: 'y',
-        score: 12,
-      },
-      {
-        value: 'k',
-        score: 15,
-      },
-      {
-        value: 'j',
-        score: 24,
-      },
-      {
-        value: 'x',
-        score: 24,
-      },
-      {
-        value: 'q',
-        score: 30,
-      },
-      {
-        value: 'z',
-        score: 30,
-      },
-      {
-        value: "''",
-        score: 0,
-      }
+        {
+          value: 'e',
+          score: 3,
+        },
+        {
+          value: 'a',
+          score: 3,
+        },
+        {
+          value: 'i',
+          score: 3,
+        },
+        {
+          value: 'o',
+          score: 3,
+        },
+        {
+          value: 'n',
+          score: 3,
+        },
+        {
+          value: 'r',
+          score: 3,
+        },
+        {
+          value: 't',
+          score: 3,
+        },
+        {
+          value: 'l',
+          score: 3,
+        },
+        {
+          value: 's',
+          score: 3,
+        },
+        {
+          value: 'u',
+          score: 3,
+        },
+        {
+          value: '',
+          score: 0,
+        },
+        {
+          value: 'd',
+          score: 6,
+        },
+        {
+          value: 'g',
+          score: 6,
+        },
+        {
+          value: 'b',
+          score: 9,
+        },
+        {
+          value: 'c',
+          score: 9,
+        },
+        {
+          value: 'm',
+          score: 9,
+        },
+        {
+          value: 'p',
+          score: 9,
+        },
+        {
+          value: 'f',
+          score: 12,
+        },
+        {
+          value: 'h',
+          score: 12,
+        },
+        {
+          value: 'v',
+          score: 12,
+        },
+        {
+          value: 'w',
+          score: 12,
+        },
+        {
+          value: 'y',
+          score: 12,
+        },
+        {
+          value: 'k',
+          score: 15,
+        },
+        {
+          value: 'j',
+          score: 24,
+        },
+        {
+          value: 'x',
+          score: 24,
+        },
+        {
+          value: 'q',
+          score: 30,
+        },
+        {
+          value: 'z',
+          score: 30,
+        },
+        {
+          value: "'",
+          score: 0,
+        }
       ]
     };
   },
@@ -695,69 +474,74 @@ export default {
     endGame() {
       clearInterval(this.timerInterval);
     },
-<<<<<<< Updated upstream
-=======
-    generateRandomStack() {
-        const alphabet = ['a', 'b', 'c', 'd', 'e', ]
-        for (let i = 0; i <= 20; i++) {
-            const element = array[i];
-            Math.floor(Math.random() * this.array.length);
-        }
+    generateChars() {
+      // 
+      return [{ id: 1, value: 'a', score: 4 }, { id: 2, value: 'b', score: 5 }]
     },
->>>>>>> Stashed changes
+    dragChar(e) {
+      e.dataTransfer.setData('text/plain', e.target.id);
+    },
+    dropChar(e) {
+      e.preventDefault();
+      const charId = e.dataTransfer.getData('text/plain');
+      const draggedChar = document.getElementById(charId);
+      e.target.innerHTML = draggedChar.innerHTML;
+
+      
+    },
   }
 };
 </script>
 
 <style scoped>
 .main__wrapper {
-    margin: 15px;
+  margin: 15px;
 }
 
 .button {
-    background-color: #888;
-    border: #888 solid 1px;
-    color: #000;
-    display: inline-block;
-    padding: 10px;
-    text-decoration: none;
+  background-color: #888;
+  border: #888 solid 1px;
+  color: #000;
+  display: inline-block;
+  padding: 10px;
+  text-decoration: none;
 }
 
 /* Deck */
 .main__decks {
-    display: flex;
+  display: flex;
 }
 
 .decks__deck {
-    width: 25%;
+  width: 25%;
 }
 
 .deck__rack {
-    margin: 15px 0px;
+  margin: 15px 0px;
 }
 
 .rack__col {
-    background-color: #B1AFFF;
-    border: #000 solid 1px;
-    display: inline-block;
-    padding: 10px;
+  background-color: #B1AFFF;
+  border: #000 solid 1px;
+  display: inline-block;
+  padding: 10px;
 }
 
 .rack__row {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 /* Infobox */
 .main__infobox {
-    background-color: #C8FFD4;
-    border: #000 solid 1px;
-    margin-bottom: 15px;
-    padding: 15px;
-    text-align: center;
+  background-color: #C8FFD4;
+  border: #000 solid 1px;
+  margin-bottom: 15px;
+  padding: 15px;
+  text-align: center;
 }
 
 .main__infobox p {
-    margin: 15px;
+  margin: 15px;
 }
 </style>

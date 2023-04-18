@@ -46,4 +46,14 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+/* Game > Stack */
+.stack__char {
+  background-color: #B1AFFF;
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+}
+
+
 </style>
