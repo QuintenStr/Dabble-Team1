@@ -1,6 +1,6 @@
 <template>
     <h1>Game page</h1>
-    <div class="main__wrapper"  v-if="!isGameEnded">
+    <div class="main__wrapper" v-if="!isGameEnded">
         <div class="main__infobox">
             <p class="infobox__timer">Time remaining: {{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</p>
             <button v-on:click="isGameEnded = true">END GAME</button>
@@ -312,7 +312,7 @@
             </div>
         </div>
     </div>
-    
+
     <div>
 
     </div>
@@ -320,154 +320,204 @@
 
 <script>
 export default {
-  data() {
-    return {
-      durationInSeconds: 180,
-      timeRemaining: 0,
-      timerInterval: null,
-      isGameEnded: false,
-      chars: [
-      {
-        value: 'e',
-        score: 3,
-      },
-      {
-        value: 'a',
-        score: 3,
-      },
-      {
-        value: 'i',
-        score: 3,
-      },
-      {
-        value: 'o',
-        score: 3,
-      },
-      {
-        value: 'n',
-        score: 3,
-      },
-      {
-        value: 'r',
-        score: 3,
-      },
-      {
-        value: 't',
-        score: 3,
-      },
-      {
-        value: 'l',
-        score: 3,
-      },
-      {
-        value: 's',
-        score: 3,
-      },
-      {
-        value: 'u',
-        score: 3,
-      },
-      {
-        value: '',
-        score: 0,
-      },
-      {
-        value: 'd',
-        score: 6,
-      },
-      {
-        value: 'g',
-        score: 6,
-      },
-      {
-        value: 'b',
-        score: 9,
-      },
-      {
-        value: 'c',
-        score: 9,
-      },
-      {
-        value: 'm',
-        score: 9,
-      },
-      {
-        value: 'p',
-        score: 9,
-      },
-      {
-        value: 'f',
-        score: 12,
-      },
-      {
-        value: 'h',
-        score: 12,
-      },
-      {
-        value: 'v',
-        score: 12,
-      },
-      {
-        value: 'w',
-        score: 12,
-      },
-      {
-        value: 'y',
-        score: 12,
-      },
-      {
-        value: 'k',
-        score: 15,
-      },
-      {
-        value: 'j',
-        score: 24,
-      },
-      {
-        value: 'x',
-        score: 24,
-      },
-      {
-        value: 'q',
-        score: 30,
-      },
-      {
-        value: 'z',
-        score: 30,
-      },
-      {
-        value: "''",
-        score: 0,
-      }
-      ]
-    };
-  },
+    data() {
+        return {
+            durationInSeconds: 180,
+            timeRemaining: 0,
+            timerInterval: null,
+            isGameEnded: false,
+            chars: [
+                {
+                    id: 1,
+                    value: 'e',
+                    score: 3,
+                },
+                {
+                    id: 2,
+                    value: 'a',
+                    score: 3,
+                },
+                {
+                    id: 3,
+                    value: 'i',
+                    score: 3,
+                },
+                {
+                    id: 4,
+                    value: 'o',
+                    score: 3,
+                },
+                {
+                    id: 5,
+                    value: 'n',
+                    score: 3,
+                },
+                {
+                    id: 6,
+                    value: 'r',
+                    score: 3,
+                },
+                {
+                    id: 7,
+                    value: 't',
+                    score: 3,
+                },
+                {
+                    id: 8,
+                    value: 'l',
+                    score: 3,
+                },
+                {
+                    id: 9,
+                    value: 's',
+                    score: 3,
+                },
+                {
+                    id: 10,
+                    value: 'u',
+                    score: 3,
+                },
+                {
+                    id: 11,
+                    value: '',
+                    score: 0,
+                },
+                {
+                    id: 12,
+                    value: 'd',
+                    score: 6,
+                },
+                {
+                    id: 13,
+                    value: 'g',
+                    score: 6,
+                },
+                {
+                    id: 14,
+                    value: 'b',
+                    score: 9,
+                },
+                {
+                    id: 15,
+                    value: 'c',
+                    score: 9,
+                },
+                {
+                    id: 16,
+                    value: 'm',
+                    score: 9,
+                },
+                {
+                    id: 17,
+                    value: 'p',
+                    score: 9,
+                },
+                {
+                    id: 18,
+                    value: 'f',
+                    score: 12,
+                },
+                {
+                    id: 19,
+                    value: 'h',
+                    score: 12,
+                },
+                {
+                    id: 20,
+                    value: 'v',
+                    score: 12,
+                },
+                {
+                    id: 21,
+                    value: 'w',
+                    score: 12,
+                },
+                {
+                    id: 22,
+                    value: 'y',
+                    score: 12,
+                },
+                {
+                    id: 23,
+                    value: 'k',
+                    score: 15,
+                },
+                {
+                    id: 24,
+                    value: 'j',
+                    score: 24,
+                },
+                {
+                    id: 25,
+                    value: 'x',
+                    score: 24,
+                },
+                {
+                    id: 26,
+                    value: 'q',
+                    score: 30,
+                },
+                {
+                    id: 27,
+                    value: 'z',
+                    score: 30,
+                },
+                {
+                    id: 28,
+                    value: "'",
+                    score: 0,
+                },
+                {
+                    id: 29,
+                    value: "'",
+                    score: 0,
+                }, 
+                {
+                    id: 30,
+                    value: "'",
+                    score: 0,
+                }
+            ],
+        };
 
-  computed: {
-    minutes() {
-      return Math.floor(this.timeRemaining / 60);
     },
-    seconds() {
-      return this.timeRemaining % 60;
-    },
-  },
 
-  mounted() {
-    this.timeRemaining = this.durationInSeconds;
-    this.timerInterval = setInterval(this.updateTimer, 1000);
-  },
+    computed: {
+        minutes() {
+            return Math.floor(this.timeRemaining / 60);
+        },
+        seconds() {
+            return this.timeRemaining % 60;
+        },
+    },
 
-  methods: {
-    updateTimer() {
-      this.timeRemaining--;
-      if (this.timeRemaining == 0) {
-        clearInterval(this.timerInterval);
-      }
+    mounted() {
+        this.timeRemaining = this.durationInSeconds;
+        this.timerInterval = setInterval(this.updateTimer, 1000);
+        this.calculateTotalScore();
     },
-    endGame() {
-      clearInterval(this.timerInterval);
-    },
-  }
+
+    methods: {
+        updateTimer() {
+            this.timeRemaining--;
+            if (this.timeRemaining == 0) {
+                clearInterval(this.timerInterval);
+            }
+        },
+        endGame() {
+            clearInterval(this.timerInterval);
+        },
+        calculateTotalScore() {
+            this.totalScore = this.chars.reduce((acc, char) => acc + char.score, 0);
+        },
+        generateRandomChar() {
+            const stack = [];
+            for (let i = 0; i < 20; i++) {
+                stack.push(this.chars[Math.floor(Math.random() * this.chars.length)]);
+            }
+            return stack;
+        }
+    }
 };
 </script>
 
