@@ -1,12 +1,12 @@
 <template>
-  <GamePage />
+    <RulesPage />
 </template>
   
 <script>
-import GamePage from '../components/Game/MainPage.vue'
+import RulesPage from '../components/Rules/MainPage.vue'
 export default {
   components: {
-    GamePage,
+    RulesPage,
   }
 }
 </script>
