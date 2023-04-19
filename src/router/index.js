@@ -3,6 +3,8 @@ import HomeView from '../views/HomePage.vue'
 import GameView from '../views/GamePage.vue'
 import RulesView from '../views/RulesPage.vue'
 import SettingsView from '../views/SettingsPage.vue'
+import CreatePage from '../views/CreatePage.vue'
+import JoinPage from '../views/JoinPage.vue'
 
 
 const routes = [
@@ -25,7 +27,17 @@ const routes = [
     path: '/rules',
     name: 'rules',
     component: RulesView
-  }
+  },
+  {
+    path: '/create',
+    name: 'create',
+    component: CreatePage
+  },
+  {
+    path: '/join',
+    name: 'join',
+    component: JoinPage
+  },
 ]
 
 const router = createRouter({

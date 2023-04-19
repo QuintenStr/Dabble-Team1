@@ -4,7 +4,13 @@
   
 <script>
 import GamePage from '../components/Game/MainPage.vue'
+
 export default {
+  data() {
+    return {
+      joining: false,
+    }
+  },
   components: {
     GamePage,
   }
