@@ -1,11 +1,26 @@
 <template>
     <div class="createGame" v-if="!joinedGame">
         <h1>Join party</h1>
-        <label>Your name: </label>
-        <input type="text" v-model="name">
-        <label>Game code: </label>
-        <input type="text" v-model="inpGameId">
-        <button @click="joinGame()">Join game</button>
+        <div id="form-container">
+            <div id="border">
+                <div id="form">
+                    <div id="form_name">
+                        <label>Your name: </label>
+                        <input type="text" v-model="name">
+                    </div>
+                    <div id="form_code">
+                        <label>Game code: </label>
+                        <input type="text" v-model="inpGameId">
+                    </div>
+                    <div id="form_join">
+                        <button id="btnJoin" @click="joinGame()">Join game</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="buttons">
+            <router-link class="button" id="buttonHome" to="/">Home</router-link>
+        </div>
     </div>
 
     <div class="waitingPlayers" v-else>
@@ -74,12 +89,20 @@ export default {
         },
         launchGame() {
             axios.get(`http://localhost/dabble/startGame.php?game_id=${this.inpGameId}`)
-            .then(res => {
-                this.$router.push('/game');
-            })
+                .then(res => {
+                    this.$router.push('/game');
+                })
         }
     },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+#border {
+    margin-top: -30px;
+}
+
+#form_code {
+    display: flex;
+}
+</style>
