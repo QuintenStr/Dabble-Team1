@@ -1,5 +1,5 @@
 <template>
-  <div class="body">
+  <div class="body-container">
     <h1>Dabble</h1>
     <div id="buttons">
       <router-link class="button" to="/game">New game</router-link>
@@ -28,9 +28,5 @@ export default {
 }
 </script>
 
-<style scoped>
-.body{
-  display: flex;
-  flex-direction: column;
-}
+<style>
 </style>

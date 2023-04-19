@@ -1,21 +1,25 @@
 <template>
     <div>
         <h1>Settings</h1>
+        <div id="border-container">
+            <div id="border">
+                <p>
+                    Demotekst <br>
+                    Demotekst <br>
+                    Demotekst <br>
+                    Demotekst <br>
+                    Demotekst <br>
+                    Demotekst <br>
+                </p>
+            </div>
+        </div>
         <div id="buttons">
-            <router-link class="button" to="/">Home</router-link>
+            <router-link class="button" id="buttonHome" to="/">Home</router-link>
         </div>
     </div>
 </template>
   
 <script>
-export default {
-    data() {
-    },
-    computed: {
-    },
-    methods: {
-    },
-};
 </script>
   
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-  <div class="body">
+  <div class="body-container">
     <router-view />
     <audio
       src="https://files.freemusicarchive.org/storage-freemusicarchive-org/tracks/hIFJ4757SD1qbJ9veZoewTr0ihjJjpkMAOJZr1G6.mp3?download=1&name=Eggy%20Toast%20-%20Lose%20your%20head.mp3.mp3"
@@ -51,9 +51,11 @@ body {
   height: 100%;
 }
 
-.body {
+.body-container {
   background-color: #B9E9FC;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 #app {
@@ -72,6 +74,10 @@ h1 {
   color: #B2B0FF;
   margin-left: auto;
   margin-right: auto;
+  text-shadow: 1px 1px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000;
 }
 
 nav {
@@ -95,6 +101,8 @@ nav a.router-link-exact-active {
   margin-bottom: auto;
 }
 
+
+/* main 3 buttons on homescreen */
 .button {
   margin-bottom: 30px;
   padding: 10px;
@@ -112,6 +120,27 @@ nav a.router-link-exact-active {
   background-color: #FDFDBE;
 }
 
+
+/* button to return to home page */
+#buttonHome {
+  margin-bottom: 30px;
+  padding: 5px;
+  font-size: 20px;
+  background-color: #C9FFD5;
+  border-radius: 5px;
+  border: 2px solid black;
+  width: 200px;
+  text-decoration: none;
+  color: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#buttonHome:hover {
+  background-color: #FDFDBE;
+}
+
+
+/* sound button mute*/
 #muteBtn {
   margin-top: 10px;
   margin-left: 10px;
@@ -136,6 +165,41 @@ nav a.router-link-exact-active {
   background-color: #FDFDBE;
 }
 
+
+/* layout for settings and rules border */
+#border-container {
+  padding: 20px;
+}
+
+#border {
+  background-color: #B2B0FF;
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: justify;
+  line-height: 1.3;
+  font-family: Arial, sans-serif;
+}
+
+#border p {
+  margin-bottom: 20px;
+  padding-left: 20px;
+  text-indent: -20px;
+  text-indent: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#border p:first-of-type {
+  padding-top: 0;
+}
+
+#border p:last-of-type {
+  margin-bottom: 0;
+}
 
 /* Game > Stack */
 .stack__char {
