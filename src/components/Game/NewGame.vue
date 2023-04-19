@@ -19,9 +19,6 @@
                 </div>
             </div>
         </div>
-        <div id="buttons">
-            <router-link class="button" id="buttonHome" to="/">Home</router-link>
-        </div>
     </div>
     <div class="waitingPlayers" v-else>
         <h1>Party {{ game.id }}</h1>

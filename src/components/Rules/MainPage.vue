@@ -28,7 +28,6 @@
 </script>
   
 <style scoped>
-
 @media (max-width: 600px) {
     .rules-page {
         padding: 20px;
