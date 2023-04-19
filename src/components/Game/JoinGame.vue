@@ -44,7 +44,7 @@ export default {
     methods: {
         fetchPlayers() {
             if(this.isStarted == 1) return;
-            axios.get(`http://api.bklm.be/gameReady.php?game_id=${this.inpGameId}`)
+            axios.get(`https://bklm.be/api/gameReady.php?game_id=${this.inpGameId}`)
                 .then(response => {
                     this.game.players = response.data;
                     this.connectedPlayers = response.data.length;
@@ -57,7 +57,7 @@ export default {
         joinGame() {
             store.commit('setGameId', this.inpGameId);
             
-            axios.get(`http://api.bklm.be/joinGame.php?playerName=${this.name}&gameId=${this.inpGameId}`)
+            axios.get(`https://bklm.be/api/joinGame.php?playerName=${this.name}&gameId=${this.inpGameId}`)
                 .then(res => {
                     if (res.data.error) this.error = res.data.error;
                     else {
@@ -77,7 +77,7 @@ export default {
                 })
         },
         launchGame() {
-            axios.get(`http://api.bklm.be/startGame.php?game_id=${this.inpGameId}`)
+            axios.get(`https://bklm.be/api/startGame.php?game_id=${this.inpGameId}`)
             .then(res => {
                 this.$router.push('/game');
             })
