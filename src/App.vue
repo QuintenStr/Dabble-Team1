@@ -5,7 +5,8 @@
       src="https://files.freemusicarchive.org/storage-freemusicarchive-org/tracks/hIFJ4757SD1qbJ9veZoewTr0ihjJjpkMAOJZr1G6.mp3?download=1&name=Eggy%20Toast%20-%20Lose%20your%20head.mp3.mp3"
       loop ref="audio">
     </audio>
-    <button id="muteBtn" @click="toggleAudio">{{ isPlaying ? 'Sound On' : 'Sound Off' }}</button>
+    <button id="homeBtn" class="btn" @click="goHome">Home</button>
+    <button id="muteBtn" class="btn" @click="toggleAudio">{{ isPlaying ? 'Sound On' : 'Sound Off' }}</button>
   </div>
 </template>
 
@@ -19,6 +20,9 @@ export default {
   mounted() {
   },
   methods: {
+    goHome() {
+      this.$router.push('/');
+    },
     toggleAudio() {
       const audio = this.$refs.audio;
       this.isPlaying = !this.isPlaying;
@@ -107,9 +111,7 @@ nav a.router-link-exact-active {
   background-color: #FDFDBE;
 }
 
-#muteBtn {
-  margin-top: 10px;
-  margin-left: 10px;
+.btn {
   padding: 5px;
   font-size: 15px;
   background-color: #C9FFD5;
@@ -128,7 +130,17 @@ nav a.router-link-exact-active {
   cursor: pointer;
 }
 
-#muteBtn:hover {
+#muteBtn {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#homeBtn {
+  margin-top: 10px;
+  margin-left: 120px;
+}
+
+#muteBtn:hover, #homeBtn:hover {
   background-color: #FDFDBE;
 }
 
