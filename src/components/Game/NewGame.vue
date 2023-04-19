@@ -106,7 +106,7 @@ export default {
 .error {
     margin-left: auto;
     color: brown;
-    height: 10%;
+    height: 1px;
 }
 
 #form_players {
