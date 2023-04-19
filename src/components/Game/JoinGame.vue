@@ -104,5 +104,4 @@ export default {
 #form_code {
     display: flex;
 }
-
 </style>

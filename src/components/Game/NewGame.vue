@@ -12,15 +12,20 @@
                         <label>Your name: </label>
                         <input type="text" v-model="currentPlayerName">
                     </div>
+                    <div class="error" v-if="errors">
+                        Your name is empty
+                    </div>
                     <div id="form_join">
                         <button id="btnJoin" @click="createGame()">Create game</button>
                     </div>
                 </div>
             </div>
         </div>
+
         <div id="buttons">
             <router-link class="button" id="buttonHome" to="/">Home</router-link>
         </div>
+
     </div>
 
     <div class="waitingPlayers" v-else>
@@ -33,10 +38,6 @@
             </ul>
         </div>
         <button v-on:click="launchGame()">START GAME</button>
-    </div>
-
-    <div class="error" v-if="errors">
-        Your name is empty
     </div>
 </template>
 
@@ -100,6 +101,12 @@ export default {
 <style scoped>
 #border {
     margin-top: -30px;
+}
+
+.error {
+    margin-left: auto;
+    color: brown;
+    height: 10%;
 }
 
 #form_players {
