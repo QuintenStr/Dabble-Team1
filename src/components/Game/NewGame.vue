@@ -6,28 +6,23 @@
                 <div id="form">
                     <div id="form_players">
                         <label>Players: </label>
-                        <input type="number" v-model="players" min="2" max="4">
+                        <input type="number" v-model="players" min="2" max="4" />
                     </div>
                     <div id="form_name">
                         <label>Your name: </label>
-                        <input type="text" v-model="currentPlayerName">
+                        <input type="text" v-model="currentPlayerName" />
                     </div>
-                    <div class="error" v-if="errors">
-                        Your name is empty
-                    </div>
+                    <div class="error">{{ errors ? "Your name is empty" : " " }}</div>
                     <div id="form_join">
                         <button id="btnJoin" @click="createGame()">Create game</button>
                     </div>
                 </div>
             </div>
         </div>
-
         <div id="buttons">
             <router-link class="button" id="buttonHome" to="/">Home</router-link>
         </div>
-
     </div>
-
     <div class="waitingPlayers" v-else>
         <h1>Party {{ game.id }}</h1>
         <div class="players">
@@ -41,14 +36,15 @@
     </div>
 </template>
 
+
 <script>
-import store from '@/store';
-import axios from 'axios';
+import store from "@/store";
+import axios from "axios";
 
 export default {
     data() {
         return {
-            currentPlayerName: '',
+            currentPlayerName: "",
             connectedPlayers: 1,
             players: 2,
             errors: false,
@@ -56,25 +52,28 @@ export default {
             gameId: null,
             socket: {},
             game: {},
-        }
+        };
     },
     methods: {
         fetchPlayers() {
             // Fetch game state
-            axios.get(`http://localhost/dabble/gameReady.php?game_id=${this.game.id}`)
-                .then(response => {
+            axios
+                .get(`http://localhost/dabble/gameReady.php?game_id=${this.game.id}`)
+                .then((response) => {
                     this.game.players = response.data;
                     this.connectedPlayers = response.data.length;
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.log(error);
                 });
         },
         async createGame() {
             // Send create event to server
-            if (this.currentPlayerName != '') {
+            if (this.currentPlayerName != "") {
                 this.createdGame = true;
-                const res = await axios.get(`http://localhost/dabble/createGame.php?playerName=${this.currentPlayerName}&playersCount=${this.players}`);
+                const res = await axios.get(
+                    `http://localhost/dabble/createGame.php?playerName=${this.currentPlayerName}&playersCount=${this.players}`
+                );
                 if (res.status == 200) {
                     this.game = res.data;
 
@@ -85,18 +84,19 @@ export default {
                         }
                     }, 2000);
                 }
-            }
-            else this.errors = true;
+            } else this.errors = true;
         },
         launchGame() {
-            axios.get(`http://localhost/dabble/startGame.php?game_id=${this.game.id}`)
-                .then(res => {
-                    this.$router.push('/game');
-                })
-        }
+            axios
+                .get(`http://localhost/dabble/startGame.php?game_id=${this.game.id}`)
+                .then((res) => {
+                    this.$router.push("/game");
+                });
+        },
     },
-}
+};
 </script>
+
 
 <style scoped>
 #border {
@@ -106,7 +106,7 @@ export default {
 .error {
     margin-left: auto;
     color: brown;
-    height: 1px;
+    height: 0px;
 }
 
 #form_players {
