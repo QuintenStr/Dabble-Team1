@@ -1,5 +1,5 @@
 <template>
-    <div class="body">
+    <div class="body-container">
         <h1>Dabble</h1>
         <div id="buttons">
             <router-link class="button" to="/create">Create game</router-link>

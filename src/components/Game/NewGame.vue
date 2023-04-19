@@ -1,11 +1,26 @@
 <template>
     <div class="createGame" v-if="!createdGame">
         <h1>Create party</h1>
-        <label>Players: </label>
-        <input type="number" v-model="players" min="2" max="4">
-        <label>Your name: </label>
-        <input type="text" v-model="currentPlayerName">
-        <button @click="createGame()">Create game</button>
+        <div id="form-container">
+            <div id="border">
+                <div id="form">
+                    <div id="form_players">
+                        <label>Players: </label>
+                        <input type="number" v-model="players" min="2" max="4">
+                    </div>
+                    <div id="form_name">
+                        <label>Your name: </label>
+                        <input type="text" v-model="currentPlayerName">
+                    </div>
+                    <div id="form_join">
+                        <button id="btnJoin" @click="createGame()">Create game</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="buttons">
+            <router-link class="button" id="buttonHome" to="/">Home</router-link>
+        </div>
     </div>
 
     <div class="waitingPlayers" v-else>
@@ -74,12 +89,20 @@ export default {
         },
         launchGame() {
             axios.get(`http://localhost/dabble/startGame.php?game_id=${this.game.id}`)
-            .then(res => {
-                this.$router.push('/game');
-            })
+                .then(res => {
+                    this.$router.push('/game');
+                })
         }
     },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+#border {
+    margin-top: -30px;
+}
+
+#form_players {
+    display: flex;
+}
+</style>
