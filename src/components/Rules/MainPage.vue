@@ -1,9 +1,6 @@
 <template>
     <div>
         <h1>Rules</h1>
-        <div id="buttons">
-            <router-link class="button" to="/">Home</router-link>
-        </div>
         <div id="border">
             <p>
                 <span>- 2-4 spelers.</span><br>
@@ -29,11 +26,6 @@
 </script>
   
 <style scoped>
-.button {
-    position: fixed;
-    bottom: 0;
-    right: 20px;
-}
 
 #border {
     background-color: #B2B0FF;

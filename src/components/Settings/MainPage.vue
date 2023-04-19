@@ -1,9 +1,6 @@
 <template>
     <div>
         <h1>Settings</h1>
-        <div id="buttons">
-            <router-link class="button" to="/">Home</router-link>
-        </div>
     </div>
 </template>
   
