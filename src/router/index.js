@@ -6,6 +6,7 @@ import SettingsView from '../views/SettingsPage.vue'
 import CreatePage from '../views/CreatePage.vue'
 import JoinPage from '../views/JoinPage.vue'
 
+
 const routes = [
   {
     path: '/',
