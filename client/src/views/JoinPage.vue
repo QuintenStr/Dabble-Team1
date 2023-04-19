@@ -1,9 +1,9 @@
 <template>
-    <PlayingPage />
+    <JoinGame />
 </template>
     
 <script>
-import PlayingPage from '../components/Playing/MainPage.vue'
+import JoinGame from '../components/Game/JoinGame.vue'
 
 export default {
     data() {
@@ -12,7 +12,7 @@ export default {
         }
     },
     components: {
-        PlayingPage,
+        JoinGame,
     }
 }
 </script>

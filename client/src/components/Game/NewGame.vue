@@ -1,7 +1,6 @@
 <template>
-    <h1>Create a game</h1>
-
     <div class="createGame" v-if="!createdGame">
+        <h1>Create party</h1>
         <label>Players: </label>
         <input type="number" v-model="players" min="2" max="4">
         <label>Your name: </label>
@@ -10,8 +9,14 @@
     </div>
 
     <div class="waitingPlayers" v-else>
-        <h2>You created party {{ gameId }}</h2>
-        <div class="players"></div>
+        <h1>Party {{ game.id }}</h1>
+        <div class="players">
+            <ul>
+                <li v-for="(player, i) in game.players" :key="player.id">
+                    Player {{ i + 1 }}: {{ player.name }}
+                </li>
+            </ul>
+        </div>
         <button>START GAME</button>
     </div>
 
@@ -23,6 +28,7 @@
 <script>
 import store from '@/store';
 import io from 'socket.io-client'
+import axios from 'axios';
 
 export default {
     data() {
@@ -34,46 +40,37 @@ export default {
             createdGame: false,
             gameId: null,
             socket: {},
+            game: {},
         }
     },
-    mounted() {
-        // Se connecter au serveur Socket.io
-        this.socket = io('http://134.122.62.249');
-
-        // Gérer l'événement 'gameCreated' pour recevoir l'ID de la partie
-        this.socket.on('gameCreated', (data) => {
-            this.gameId = data.gameId;
-        });
-
-        // Gérer l'événement 'gameNotFound' pour informer l'utilisateur que la partie n'existe pas
-        this.socket.on('gameNotFound', () => {
-            alert('La partie n\'existe pas.');
-        });
-
-        // Gérer l'événement 'gameFull' pour informer l'utilisateur que la partie est pleine
-        this.socket.on('gameFull', () => {
-            alert('La partie est pleine.');
-        });
-
-        // Gérer l'événement 'gameJoined' pour recevoir l'ID de la partie
-        this.socket.on('gameJoined', (data) => {
-            this.gameId = data.gameId;
-        });
-
-        // Gérer l'événement 'gameReady' pour indiquer que la partie a commencé
-        this.socket.on('gameReady', () => {
-            console.log('La partie a commencé.');
-        });
-    },
     methods: {
-        createGame() {
+        fetchPlayers() {
+            // Remplacez "your-php-file.php" par le chemin vers votre fichier PHP
+            axios.get(`http://localhost/dabble/gameReady.php?game_id=${this.game.id}`)
+            .then(response => {
+                this.game.players = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        },
+        async createGame() {
             // Émettre l'événement 'createGame' au serveur
             if (this.currentPlayerName != '') {
                 this.createdGame = true;
-                this.socket.emit('createGame', { playerName: this.currentPlayerName, maxPlayers: this.players });
+                const res = await axios.get(`http://localhost/dabble/createGame.php?playerName=${this.currentPlayerName}&playersCount=${this.players}`);
+                if (res.status == 200) {
+                    this.game = res.data;
+                    setInterval(() => {
+                        this.fetchPlayers();
+                    }, 2000);
+                }
             }
             else this.errors = true;
-
+        },
+        async gameReady() {
+            const res = await axios.get(`http://localhost/dabble/gameReady.php?game_id=${this.game.id}`);
+            if (res.status == 200) console.log(res.data);
         },
         // joinGame() {
         //     // Émettre l'événement 'joinGame' au serveur avec les données de la partie
