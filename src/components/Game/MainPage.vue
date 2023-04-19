@@ -79,7 +79,7 @@
           </div>
         </div>
       </div>
-      <div class="deck__stack">
+      <div class="deck__stack" ref="deck__stack">
         <div v-for="char in stack" v-html="`${char.value} : ${char.score}`" :id="char.id" class="stack__char"
           :key="char.id" :ref="char.id" draggable="true" @dragstart="dragChar"></div>
       </div>
@@ -112,152 +112,122 @@ export default {
       hasGameEnded: false,
       chars: [
         {
-          id: 1,
           value: 'e',
           score: 3,
         },
         {
-          id: 2,
           value: 'a',
           score: 3,
         },
         {
-          id: 3,
           value: 'i',
           score: 3,
         },
         {
-          id: 4,
           value: 'o',
           score: 3,
         },
         {
-          id: 5,
           value: 'n',
           score: 3,
         },
         {
-          id: 6,
           value: 'r',
           score: 3,
         },
         {
-          id: 7,
           value: 't',
           score: 3,
         },
         {
-          id: 8,
           value: 'l',
           score: 3,
         },
         {
-          id: 9,
           value: 's',
           score: 3,
         },
         {
-          id: 10,
           value: 'u',
           score: 3,
         },
         {
-          id: 11,
           value: 'space',
           score: 0,
         },
         {
-          id: 11,
           value: 'space',
           score: 0,
         },
         {
-          id: 12,
           value: 'd',
           score: 6,
         },
         {
-          id: 13,
           value: 'g',
           score: 6,
         },
         {
-          id: 14,
           value: 'b',
           score: 9,
         },
         {
-          id: 15,
           value: 'c',
           score: 9,
         },
         {
-          id: 16,
           value: 'm',
           score: 9,
         },
         {
-          id: 17,
           value: 'p',
           score: 9,
         },
         {
-          id: 18,
           value: 'f',
           score: 12,
         },
         {
-          id: 19,
           value: 'h',
           score: 12,
         },
         {
-          id: 20,
           value: 'v',
           score: 12,
         },
         {
-          id: 21,
           value: 'w',
           score: 12,
         },
         {
-          id: 22,
           value: 'y',
           score: 12,
         },
         {
-          id: 23,
           value: 'k',
           score: 15,
         },
         {
-          id: 24,
           value: 'j',
           score: 24,
         },
         {
-          id: 25,
           value: 'x',
           score: 24,
         },
         {
-          id: 26,
           value: 'q',
           score: 30,
         },
         {
-          id: 27,
           value: 'z',
           score: 30,
         },
         {
-          id: 28,
           value: "'",
           score: 0,
         },
         {
-          id: 29,
           value: "'",
           score: 0,
         }
@@ -266,6 +236,8 @@ export default {
       winner: null,
       timeCompleted: null,
       winnerPoints: null,
+      removedChars: [],
+      index: null,
     };
   },
 
@@ -276,12 +248,14 @@ export default {
     seconds() {
       return this.timeRemaining % 60;
     },
+    stack() {
+      return this.generateStack();
+    }
   },
 
   mounted() {
     this.timeRemaining = this.durationInSeconds;
     this.timerInterval = setInterval(this.updateTimer, 1000);
-    this.stack = this.generateStack();
   },
 
   methods: {
@@ -298,18 +272,38 @@ export default {
       // Generates a stack of random letter-objects
       const stack = [];
       for (let i = 0; i < 20; i++) {
-        stack.push(this.chars[Math.floor(Math.random() * this.chars.length)]);
+        const char = this.chars[Math.floor(Math.random() * this.chars.length)];
+        char.id = `${i}_${char.value}`;
+        stack.push(char);
       }
       return stack;
     },
     dragChar(e) {
       e.dataTransfer.setData('text/plain', e.target.id);
+      console.log(e.target.id);
     },
     dropChar(e) {
       e.preventDefault();
-      const charId = e.dataTransfer.getData('text/plain');
-      const draggedChar = document.getElementById(charId);
-      e.target.innerHTML = draggedChar.innerHTML;
+      let charId = e.dataTransfer.getData('text/plain');
+      let draggedChar = document.getElementById(charId);
+      if (e.target.innerHTML == draggedChar.innerHTML) return;
+      const dropZone = e.target;
+
+      // Remove draggedChar from stack
+      console.log(this.stack.indexOf(draggedChar));
+      this.stack.splice(this.stack.indexOf(draggedChar), 1);
+      // this.stack.splice(this.index, 1);
+      this.removedChars.push(draggedChar);
+
+      // Put back currentChar to stack
+      const currentChar = this.removedChars.find(obj => obj.value === dropZone.innerHTML);
+      if (currentChar != null) {
+        this.stack.push(currentChar);
+        this.removedChars.splice(this.removedChars.indexOf(currentChar), 1);
+      }
+
+      // Replace currentChar with draggedChar
+      dropZone.innerHTML = draggedChar.innerHTML;
     },
   }
 };
