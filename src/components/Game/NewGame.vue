@@ -27,7 +27,6 @@
 
 <script>
 import store from '@/store';
-import io from 'socket.io-client'
 import axios from 'axios';
 
 export default {
@@ -45,7 +44,7 @@ export default {
     },
     methods: {
         fetchPlayers() {
-            // Remplacez "your-php-file.php" par le chemin vers votre fichier PHP
+            // Fetch game state
             axios.get(`http://localhost/dabble/gameReady.php?game_id=${this.game.id}`)
                 .then(response => {
                     this.game.players = response.data;
@@ -56,7 +55,7 @@ export default {
                 });
         },
         async createGame() {
-            // Émettre l'événement 'createGame' au serveur
+            // Send create event to server
             if (this.currentPlayerName != '') {
                 this.createdGame = true;
                 const res = await axios.get(`http://localhost/dabble/createGame.php?playerName=${this.currentPlayerName}&playersCount=${this.players}`);

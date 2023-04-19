@@ -42,7 +42,6 @@ export default {
     },
     methods: {
         fetchPlayers() {
-            // Remplacez "your-php-file.php" par le chemin vers votre fichier PHP
             axios.get(`http://localhost/dabble/gameReady.php?game_id=${this.inpGameId}`)
                 .then(response => {
                     this.game.players = response.data;
@@ -54,7 +53,6 @@ export default {
                 });
         },
         joinGame() {
-            // Remplacez "your-php-file.php" par le chemin vers votre fichier PHP
             axios.get(`http://localhost/dabble/joinGame.php?playerName=${this.name}&gameId=${this.inpGameId}`)
                 .then(res => {
                     if (res.data.error) this.error = res.data.error;
