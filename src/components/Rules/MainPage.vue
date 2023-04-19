@@ -20,9 +20,6 @@
                 <span>- Apostrof tegels: 2</span>
             </p>
         </div>
-        <div id="buttons">
-            <router-link class="button" id="buttonHome" to="/">Home</router-link>
-        </div>
     </div>
 </template>
   

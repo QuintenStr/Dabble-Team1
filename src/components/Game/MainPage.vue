@@ -232,7 +232,6 @@ export default {
           score: 0,
         }
       ],
-      stack: null,
       winner: null,
       timeCompleted: null,
       winnerPoints: null,

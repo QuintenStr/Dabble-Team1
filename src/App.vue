@@ -144,17 +144,18 @@ nav a.router-link-exact-active {
   cursor: pointer;
 }
 
-#muteBtn {
+#homeBtn {
   margin-top: 10px;
   margin-left: 10px;
 }
 
-#homeBtn {
+#muteBtn {
   margin-top: 10px;
   margin-left: 120px;
 }
 
-#muteBtn:hover, #homeBtn:hover {
+#muteBtn:hover,
+#homeBtn:hover {
   background-color: #FDFDBE;
 }
 
