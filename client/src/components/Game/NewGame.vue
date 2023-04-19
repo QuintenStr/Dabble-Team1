@@ -17,7 +17,7 @@
                 </li>
             </ul>
         </div>
-        <button>START GAME</button>
+        <button v-on:click="launchGame()">START GAME</button>
     </div>
 
     <div class="error" v-if="errors">
@@ -47,12 +47,13 @@ export default {
         fetchPlayers() {
             // Remplacez "your-php-file.php" par le chemin vers votre fichier PHP
             axios.get(`http://localhost/dabble/gameReady.php?game_id=${this.game.id}`)
-            .then(response => {
-                this.game.players = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
+                .then(response => {
+                    this.game.players = response.data;
+                    this.connectedPlayers = response.data.length;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
         async createGame() {
             // Émettre l'événement 'createGame' au serveur
@@ -61,21 +62,23 @@ export default {
                 const res = await axios.get(`http://localhost/dabble/createGame.php?playerName=${this.currentPlayerName}&playersCount=${this.players}`);
                 if (res.status == 200) {
                     this.game = res.data;
-                    setInterval(() => {
+
+                    let intervalID = setInterval(() => {
                         this.fetchPlayers();
+                        if (this.connectedPlayers === this.players) {
+                            clearInterval(intervalID);
+                        }
                     }, 2000);
                 }
             }
             else this.errors = true;
         },
-        async gameReady() {
-            const res = await axios.get(`http://localhost/dabble/gameReady.php?game_id=${this.game.id}`);
-            if (res.status == 200) console.log(res.data);
-        },
-        // joinGame() {
-        //     // Émettre l'événement 'joinGame' au serveur avec les données de la partie
-        //     this.$socket.emit('joinGame', { playerName: this.playerName, gameId: this.gameId });
-        // }
+        launchGame() {
+            axios.get(`http://localhost/dabble/startGame.php?game_id=${this.game.id}`)
+            .then(res => {
+                this.$router.push('/game');
+            })
+        }
     },
 }
 </script>

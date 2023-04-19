@@ -1,5 +1,5 @@
 <template>
-  <GamePage v-if="!newGame" />
+  <GamePage />
 </template>
   
 <script>
@@ -8,7 +8,6 @@ import GamePage from '../components/Game/MainPage.vue'
 export default {
   data() {
     return {
-      newGame: true,
       joining: false,
     }
   },
