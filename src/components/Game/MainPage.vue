@@ -85,6 +85,21 @@
       </div>
     </div>
   </div>
+  <div v-if="isGameEnded">
+        <!-- EndPage -->
+        <p class="winnerMessage">
+            Congrats {{ winner }}, you won! You finished the game in {{ timeCompleted }} minute(s) and with {{ winnerPoints }} points!
+        </p>
+        <p class="textBoard">Leaderboard:</p>
+        <ol class="leaderBoard">
+            <li class="p1">Player1</li>
+            <li class="p2">Player2</li>
+            <li class="p3">Player3</li>
+            <li class="p4">Player4</li>
+        </ol>
+        <p class="remainingTime"></p>
+        <router-link class="mainPage button" to="/">Home</router-link>
+    </div>
 </template>
 
 <script>
