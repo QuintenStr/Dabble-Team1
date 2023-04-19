@@ -45,7 +45,7 @@ export default {
     methods: {
         fetchPlayers() {
             // Fetch game state
-            axios.get(`http://localhost/dabble/gameReady.php?game_id=${this.game.id}`)
+            axios.get(`http://api.bklm.be/gameReady.php?game_id=${this.game.id}`)
                 .then(response => {
                     this.game.players = response.data;
                     this.connectedPlayers = response.data.length;
@@ -58,9 +58,11 @@ export default {
             // Send create event to server
             if (this.currentPlayerName != '') {
                 this.createdGame = true;
-                const res = await axios.get(`http://localhost/dabble/createGame.php?playerName=${this.currentPlayerName}&playersCount=${this.players}`);
+                const res = await axios.get(`http://api.bklm.be/createGame.php?playerName=${this.currentPlayerName}&playersCount=${this.players}`);
                 if (res.status == 200) {
                     this.game = res.data;
+                    store.commit('setCurrentPlayer', res.data.player);
+                    store.commit('setGameId', this.game.id);
 
                     let intervalID = setInterval(() => {
                         this.fetchPlayers();
@@ -73,10 +75,10 @@ export default {
             else this.errors = true;
         },
         launchGame() {
-            axios.get(`http://localhost/dabble/startGame.php?game_id=${this.game.id}`)
-            .then(res => {
-                this.$router.push('/game');
-            })
+            axios.get(`http://api.bklm.be/startGame.php?game_id=${this.game.id}`)
+                .then(res => {
+                    this.$router.push('/game');
+                })
         }
     },
 }

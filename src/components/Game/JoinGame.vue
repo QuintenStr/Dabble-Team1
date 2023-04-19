@@ -26,6 +26,7 @@
 
 <script>
 import axios from 'axios';
+import store from '@/store';
 
 export default {
     data() {
@@ -43,7 +44,7 @@ export default {
     methods: {
         fetchPlayers() {
             if(this.isStarted == 1) return;
-            axios.get(`http://localhost/dabble/gameReady.php?game_id=${this.inpGameId}`)
+            axios.get(`http://api.bklm.be/gameReady.php?game_id=${this.inpGameId}`)
                 .then(response => {
                     this.game.players = response.data;
                     this.connectedPlayers = response.data.length;
@@ -54,13 +55,16 @@ export default {
                 });
         },
         joinGame() {
-            axios.get(`http://localhost/dabble/joinGame.php?playerName=${this.name}&gameId=${this.inpGameId}`)
+            store.commit('setGameId', this.inpGameId);
+            
+            axios.get(`http://api.bklm.be/joinGame.php?playerName=${this.name}&gameId=${this.inpGameId}`)
                 .then(res => {
                     if (res.data.error) this.error = res.data.error;
                     else {
                         this.error = '';
                         this.joinedGame = true;
                         this.playersCount = res.data.playersCount;
+                        store.commit('setCurrentPlayer', res.data.player);
 
                         let intervalID = setInterval(() => {
                             this.fetchPlayers();
@@ -73,7 +77,7 @@ export default {
                 })
         },
         launchGame() {
-            axios.get(`http://localhost/dabble/startGame.php?game_id=${this.inpGameId}`)
+            axios.get(`http://api.bklm.be/startGame.php?game_id=${this.inpGameId}`)
             .then(res => {
                 this.$router.push('/game');
             })
