@@ -4,6 +4,7 @@ import GameView from '../views/GamePage.vue'
 import RulesView from '../views/RulesPage.vue'
 import SettingsView from '../views/SettingsPage.vue'
 
+
 const routes = [
   {
     path: '/',

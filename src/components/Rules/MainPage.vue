@@ -1,5 +1,5 @@
 <template>
-    <div class="rules-page">
+    <div>
         <h1>Rules</h1>
         <div id="buttons">
             <router-link class="button" to="/">Home</router-link>
@@ -33,11 +33,6 @@
     position: fixed;
     bottom: 0;
     right: 20px;
-}
-
-.rules-page {
-    background-color: #B9E9FC;
-    height: 100%;
 }
 
 #border {
