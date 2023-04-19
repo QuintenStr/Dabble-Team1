@@ -67,7 +67,7 @@ export default {
                         if (this.connectedPlayers === this.players) {
                             clearInterval(intervalID);
                         }
-                    }, 2000);
+                    }, 750);
                 }
             }
             else this.errors = true;

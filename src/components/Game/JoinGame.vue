@@ -35,13 +35,14 @@ export default {
             joinedGame: false,
             connectedPlayers: 1,
             playersCount: 2,
-            isStarted: 0,
+            isStarted: null,
             game: {},
             error: '',
         }
     },
     methods: {
         fetchPlayers() {
+            if(this.isStarted == 1) return;
             axios.get(`http://localhost/dabble/gameReady.php?game_id=${this.inpGameId}`)
                 .then(response => {
                     this.game.players = response.data;
@@ -67,7 +68,7 @@ export default {
                                 clearInterval(intervalID);
                                 this.launchGame();
                             }
-                        }, 2000);
+                        }, 500);
                     }
                 })
         },

@@ -6,7 +6,7 @@
       <button class="button" v-on:click="hasGameEnded = true">END GAME</button>
     </div>
     <div class="main__deck">
-      <p class="deck__player">player name</p>
+      <p class="deck__player">You</p>
       <div class="deck__rack">
         <div class="rack__row">
           <div class="rack__col rack__11" ref="drop" @dragover.prevent @drop="dropChar">
