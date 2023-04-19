@@ -4,7 +4,6 @@
     <div class="main__infobox">
       <p class="infobox__timer">Time remaining: {{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</p>
       <button class="button" v-on:click="hasGameEnded = true">END GAME</button>
-      <router-link class="button" to="/settings">Settings</router-link>
     </div>
     <div class="main__deck">
       <p class="deck__player">player name</p>
@@ -100,7 +99,6 @@
         </ol>
         <p class="remainingTime"></p>
         <router-link class="mainPage button" to="/">Home</router-link>
-        <router-link class="mainPage button" to="/settings">Settings</router-link>
     </div>
 </template>
 
