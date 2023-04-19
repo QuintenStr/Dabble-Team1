@@ -85,7 +85,7 @@
       </div>
     </div>
   </div>
-  <div v-if="isGameEnded">
+  <div v-if="hasGameEnded">
         <!-- EndPage -->
         <p class="winnerMessage">
             Congrats {{ winner }}, you won! You finished the game in {{ timeCompleted }} minute(s) and with {{ winnerPoints }} points!
