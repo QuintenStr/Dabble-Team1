@@ -34,4 +34,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
+h1 {
+  margin-bottom: 60px;
+}
 </style>

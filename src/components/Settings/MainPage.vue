@@ -7,7 +7,8 @@
                 loop ref="audio"></audio>
             <div id="buttons">
                 <router-link class="button" to="/">Home</router-link>
-                <button class="backgroundChanger" v-on:click="changeBackground">Change background</button>
+                <button class="button1" v-on:click="changeBackground">Change background</button>
+                <button class="button1">EN/NL</button>
             </div>
         </div>
     </div>
@@ -52,16 +53,23 @@ export default {
     padding: 20px;
 }
 
-.greenBackground {
-    background-color: green;
+.button1 {
+    margin-bottom: 30px;
+    padding: 10px;
+    font-size: 30px;
+    background-color: #C9FFD5;
+    border-radius: 5px;
+    border: 2px solid black;
+    width: 300px;
+    text-decoration: none;
+    color: black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
+    cursor: pointer;
 }
 
-.redBackground {
-    background-color: red;
-}
-
-.yellowBackground {
-    background-color: yellow;
+.button1:hover {
+    background-color: #FDFDBE;
 }
 </style>
   
