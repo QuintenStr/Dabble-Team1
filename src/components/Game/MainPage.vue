@@ -320,9 +320,21 @@
     </div>
   </div>
 
-  <div>
-
-  </div>
+  <div v-if="isGameEnded">
+        <!-- EndPage -->
+        <p class="winnerMessage">
+            Congrats {{ winner }}, you won! You finished the game in {{ timeCompleted }} minute(s) and with {{ winnerPoints }} points!
+        </p>
+        <p class="textBoard">Leaderboard:</p>
+        <ol class="leaderBoard">
+            <li class="p1">Player1</li>
+            <li class="p2">Player2</li>
+            <li class="p3">Player3</li>
+            <li class="p4">Player4</li>
+        </ol>
+        <p class="remainingTime"></p>
+        <router-link class="mainPage button" to="/">Home</router-link>
+    </div>
 </template>
 
 <script>
@@ -446,7 +458,10 @@ export default {
           value: "'",
           score: 0,
         }
-      ]
+      ],
+      winner: null,
+      timeCompleted: null,
+      winnerPoints: null,
     };
   },
 
@@ -543,5 +558,69 @@ export default {
 
 .main__infobox p {
   margin: 15px;
+}
+/* End Page */
+
+.mainPage {
+    margin-top: 150px;
+    padding: 1rem;
+    font-size: 20px;
+    border: 3px solid #b8b4fc;
+    margin-right: 30px;
+    cursor: pointer;
+    transition: 0, 8s;
+    background: #fff;
+    color: #b8b4fc;
+    transition: 0.8s;
+}
+
+.mainPage:hover {
+    color: #fff;
+    background: #b8b4fc;
+}
+
+.leaderBoard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0 1rem;
+    counter-reset: leaderboard;
+    width: 50%;
+}
+
+.leaderBoard li {
+    counter-increment: leaderboard;
+    margin-bottom: .5rem;
+    display: flex;
+    align-items: center;
+    color: #4A4A4A;
+}
+
+.leaderBoard li::before {
+    content: counter(leaderboard);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(77, 171, 247, 0.16);
+    color: #4DABF7;
+    padding: 1rem;
+    border-radius: 42px;
+    height: 42px;
+    width: 42px;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-right: .75rem;
+}
+.winnerMessage {
+    margin-top: 30px;
+}
+.textBoard {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #4DABF7;
 }
 </style>
