@@ -80,23 +80,25 @@
         </div>
       </div>
       <div class="deck__stack" ref="deck__stack">
-        <div v-for="char in stack" v-html="`${char.value} : ${char.score}`" :id="`${char.id}`"
-          class="stack__char" :key="char" draggable="true" @dragstart="dragChar"></div>
+        <div v-for="char in stack" v-html="`${char.value} : ${char.score}`" :id="`${char.id}`" class="stack__char"
+          :key="char" draggable="true" @dragstart="dragChar"></div>
       </div>
     </div>
   </div>
   <div v-if="hasGameEnded">
     <!-- EndPage -->
     <p class="winnerMessage">
-      Congrats {{ players[0].name }} won! You finished the game in {{ timeCompleted }} minute(s) with {{ players[0].points }}
+      Congrats {{ players[0].name }} won! You finished the game in {{ timeCompleted }} minute(s) with {{ players[0].points
+      }}
       points!
     </p>
     <p class="textBoard">Leaderboard:</p>
     <ol class="leaderBoard">
-      <li v-for="(player, i) in players" :key="i" :class="`p${i+1}`">Name: {{ player.name }} | Score: {{ player.points }}</li>
+      <li v-for="(player, i) in players" :key="i" :class="`p${i + 1}`">Name: {{ player.name }} | Score: {{ player.points
+      }}
+      </li>
     </ol>
     <p class="remainingTime"></p>
-    <router-link class="mainPage button" to="/">Home</router-link>
   </div>
 </template>
 
@@ -259,9 +261,27 @@ export default {
   mounted() {
     this.timeRemaining = this.durationInSeconds;
     this.timerInterval = setInterval(this.updateTimer, 1000);
+
+    let intervalID = setInterval(() => {
+      this.getGameState();
+      if (this.isStarted == 1) {
+        clearInterval(intervalID);
+      }
+    }, 500);
   },
 
   methods: {
+    getGameState() {
+      const gameId = store.getters.gameId;
+
+      axios.get(`https://api.bklm.be/gameState.php?gameId=${gameId}`)
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     updateTimer() {
       this.timeRemaining--;
       if (this.timeRemaining == 0) {
@@ -269,7 +289,6 @@ export default {
       }
     },
     setScoreToDb(score, playerId) {
-      // Get player id from store
 
       // Update player points
       axios.get(`https://api.bklm.be/setPlayerPoints.php?points=${score}&playerId=${playerId}`)
@@ -457,4 +476,5 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
   color: #4DABF7;
-}</style>
+}
+</style>
