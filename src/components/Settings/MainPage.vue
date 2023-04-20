@@ -23,19 +23,19 @@ export default {
     methods: {
         changeBackground() {
             const bgcolor = `rgb(${+Math.random() * 255}, ${+Math.random() * 255}, ${+Math.random() * 255})`;
-            const header = document.getElementById("BckgColor");
+            const lower = document.querySelector('.body-container');
             const body = document.querySelector("body");
             body.style.backgroundColor = bgcolor;
-            header.style.backgroundColor = bgcolor;
+            lower.style.backgroundColor = bgcolor;
             console.log('button');
             console.log(body);
         },
         resetBackground() {
             const generalColor = 'rgb(185, 233, 252)';
+            const lower = document.querySelector('.body-container');
             const body = document.querySelector("body");
-            const header = document.getElementById("BckgColor");
             body.style.backgroundColor = generalColor;
-            header.style.backgroundColor = generalColor;
+            lower.style.backgroundColor = generalColor;
         },
     }
 }
