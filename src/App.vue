@@ -52,7 +52,8 @@ html {
 }
 
 body {
-  height: 100%;
+  height: 0;
+  background-color: #B9E9FC;
 }
 
 .body-container {
