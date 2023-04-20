@@ -1,9 +1,11 @@
 <template>
   <GamePage />
+  <TestPage v-if="false" />
 </template>
   
 <script>
 import GamePage from '../components/Game/MainPage.vue'
+import TestPage from '../components/Game/TestPage.vue'
 
 export default {
   data() {
@@ -13,6 +15,7 @@ export default {
   },
   components: {
     GamePage,
+    TestPage,
   }
 }
 </script>

@@ -3,7 +3,8 @@ import { createStore } from "vuex";
 const store = createStore({
     state: {
         currentPlayer: {},
-        players: []
+        players: [],
+        gameId: null,
     },
     getters: {
         currentPlayer (state) {
@@ -11,6 +12,9 @@ const store = createStore({
         },
         players (state) {
             return state.players;
+        },
+        gameId (state) {
+            return state.gameId;
         }
     },
     mutations: {
@@ -22,6 +26,9 @@ const store = createStore({
         },
         addPlayer(state, payload) {
             state.players.push(payload);
+        },
+        setGameId(state, gameId) {
+            state.gameId = gameId;
         }
     }
 });

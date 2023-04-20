@@ -3,7 +3,7 @@
   <div class="main__wrapper" v-if="!hasGameEnded">
     <div class="main__infobox">
       <p class="infobox__timer">Time remaining: {{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</p>
-      <button class="button" v-on:click="hasGameEnded = true">END GAME</button>
+      <button class="button" v-on:click="endGame">END GAME</button>
     </div>
     <div class="main__deck">
       <p class="deck__player">You</p>
@@ -86,23 +86,23 @@
     </div>
   </div>
   <div v-if="hasGameEnded">
-        <!-- EndPage -->
-        <p class="winnerMessage">
-            Congrats {{ winner }}, you won! You finished the game in {{ timeCompleted }} minute(s) and with {{ winnerPoints }} points!
-        </p>
-        <p class="textBoard">Leaderboard:</p>
-        <ol class="leaderBoard">
-            <li class="p1">Player1</li>
-            <li class="p2">Player2</li>
-            <li class="p3">Player3</li>
-            <li class="p4">Player4</li>
-        </ol>
-        <p class="remainingTime"></p>
-        <router-link class="mainPage button" to="/">Home</router-link>
-    </div>
+    <!-- EndPage -->
+    <p class="winnerMessage">
+      Congrats {{ winner }}, you won! You finished the game in {{ timeCompleted }} minute(s) and with {{ winnerPoints }}
+      points!
+    </p>
+    <p class="textBoard">Leaderboard:</p>
+    <ol class="leaderBoard">
+      <li v-for="(player, i) in players" :key="i" :class="`p${i+1}`">Name: {{ player.name }} | Score: {{ player.points }}</li>
+    </ol>
+    <p class="remainingTime"></p>
+    <router-link class="mainPage button" to="/">Home</router-link>
+  </div>
 </template>
 
 <script>
+import axios from 'axios';
+import store from '@/store';
 export default {
   data() {
     return {
@@ -247,9 +247,11 @@ export default {
     seconds() {
       return this.timeRemaining % 60;
     },
-    stack() {
-      return this.generateStack();
-    }
+    players() {
+      const players = store.getters.players;
+      players.sort((a, b) => b.points - a.points);
+      return players;
+    },
   },
 
   mounted() {
@@ -264,8 +266,33 @@ export default {
         clearInterval(this.timerInterval);
       }
     },
+    setScoreToDb(score) {
+      // Get player id from store
+      const playerId = store.getters.currentPlayer.id;
+
+      // Update player points
+      axios.get(`https://api.bklm.be/setPlayerPoints.php?points=${score}&playerId=${playerId}`)
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getPlayersScore() {
+      // Get player id from store
+      const gameId = store.getters.gameId;
+
+      axios.get(`https://api.bklm.be/getPlayersScore.php?gameId=${gameId}}`)
+        .then(res => {
+          store.commit('setPlayers', res.data.players);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     endGame() {
       clearInterval(this.timerInterval);
+      this.setScoreToDb();
+      this.getPlayersScore();
+      this.hasGameEnded = true;
     },
     generateStack() {
       // Generates a stack of random letter-objects
@@ -351,68 +378,70 @@ export default {
 .main__infobox p {
   margin: 15px;
 }
+
 /* End Page */
 
 .mainPage {
-    margin-top: 150px;
-    padding: 1rem;
-    font-size: 20px;
-    border: 3px solid #b8b4fc;
-    margin-right: 30px;
-    cursor: pointer;
-    transition: 0, 8s;
-    background: #fff;
-    color: #b8b4fc;
-    transition: 0.8s;
+  margin-top: 150px;
+  padding: 1rem;
+  font-size: 20px;
+  border: 3px solid #b8b4fc;
+  margin-right: 30px;
+  cursor: pointer;
+  transition: 0, 8s;
+  background: #fff;
+  color: #b8b4fc;
+  transition: 0.8s;
 }
 
 .mainPage:hover {
-    color: #fff;
-    background: #b8b4fc;
+  color: #fff;
+  background: #b8b4fc;
 }
 
 .leaderBoard {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    margin: 0 auto;
-    padding: 0 1rem;
-    counter-reset: leaderboard;
-    width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 1rem;
+  counter-reset: leaderboard;
+  width: 50%;
 }
 
 .leaderBoard li {
-    counter-increment: leaderboard;
-    margin-bottom: .5rem;
-    display: flex;
-    align-items: center;
-    color: #4A4A4A;
+  counter-increment: leaderboard;
+  margin-bottom: .5rem;
+  display: flex;
+  align-items: center;
+  color: #4A4A4A;
 }
 
 .leaderBoard li::before {
-    content: counter(leaderboard);
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(77, 171, 247, 0.16);
-    color: #4DABF7;
-    padding: 1rem;
-    border-radius: 42px;
-    height: 42px;
-    width: 42px;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-right: .75rem;
+  content: counter(leaderboard);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(77, 171, 247, 0.16);
+  color: #4DABF7;
+  padding: 1rem;
+  border-radius: 42px;
+  height: 42px;
+  width: 42px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-right: .75rem;
 }
+
 .winnerMessage {
-    margin-top: 30px;
+  margin-top: 30px;
 }
+
 .textBoard {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: #4DABF7;
-}
-</style>
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #4DABF7;
+}</style>
