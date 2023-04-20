@@ -246,6 +246,9 @@ export default {
     seconds() {
       return this.timeRemaining % 60;
     },
+    stack() {
+      return this.generateStack();
+    },
     players() {
       const players = store.getters.players;
       players.sort((a, b) => b.points - a.points);
