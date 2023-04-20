@@ -80,26 +80,27 @@
         </div>
       </div>
       <div class="deck__stack" ref="deck__stack">
-        <div v-for="char in stack" v-html="`${char.value} : ${char.score}`" :id="char.id" class="stack__char"
-          :key="char.id" :ref="char.id" draggable="true" @dragstart="dragChar"></div>
+        <div v-for="char in stack" v-html="`${char.value} : ${char.score}`" :id="`${char.id}`"
+          class="stack__char" :key="char" draggable="true" @dragstart="dragChar"></div>
       </div>
     </div>
   </div>
   <div v-if="hasGameEnded">
-        <!-- EndPage -->
-        <p class="winnerMessage">
-            Congrats {{ winner }}, you won! You finished the game in {{ timeCompleted }} minute(s) and with {{ winnerPoints }} points!
-        </p>
-        <p class="textBoard">Leaderboard:</p>
-        <ol class="leaderBoard">
-            <li class="p1">Player1</li>
-            <li class="p2">Player2</li>
-            <li class="p3">Player3</li>
-            <li class="p4">Player4</li>
-        </ol>
-        <p class="remainingTime"></p>
-        <router-link class="mainPage button" to="/">Home</router-link>
-    </div>
+    <!-- EndPage -->
+    <p class="winnerMessage">
+      Congrats {{ winner }}, you won! You finished the game in {{ timeCompleted }} minute(s) and with {{ winnerPoints }}
+      points!
+    </p>
+    <p class="textBoard">Leaderboard:</p>
+    <ol class="leaderBoard">
+      <li class="p1">Player1</li>
+      <li class="p2">Player2</li>
+      <li class="p3">Player3</li>
+      <li class="p4">Player4</li>
+    </ol>
+    <p class="remainingTime"></p>
+    <router-link class="mainPage button" to="/">Home</router-link>
+  </div>
 </template>
 
 <script>
@@ -236,7 +237,6 @@ export default {
       timeCompleted: null,
       winnerPoints: null,
       removedChars: [],
-      index: null,
     };
   },
 
@@ -268,11 +268,12 @@ export default {
       clearInterval(this.timerInterval);
     },
     generateStack() {
-      // Generates a stack of random letter-objects
+      // Generates a stack of 20 random letter-objects
       const stack = [];
       for (let i = 0; i < 20; i++) {
-        const char = this.chars[Math.floor(Math.random() * this.chars.length)];
-        char.id = `${i}_${char.value}`;
+        // ChatGPT
+        let char = Object.assign({}, this.chars[Math.floor(Math.random() * this.chars.length)]);
+        char.id = `char-${i}`;
         stack.push(char);
       }
       return stack;
@@ -283,26 +284,35 @@ export default {
     },
     dropChar(e) {
       e.preventDefault();
-      let charId = e.dataTransfer.getData('text/plain');
-      let draggedChar = document.getElementById(charId);
+      let draggedCharId = e.dataTransfer.getData('text/plain');
+      // let draggedChar = document.getElementById(draggedcharId);
+      console.log(draggedCharId);
+      console.log(this.stack);
+      const draggedChar = this.stack.find((obj) => obj.id == draggedCharId);
+
       if (e.target.innerHTML == draggedChar.innerHTML) return;
+
+      const draggedCharIndex = this.stack.findIndex((obj) => obj.id == draggedCharId);
       const dropZone = e.target;
+      // const currentChar = this.removedChars.find((obj) => obj.innerHTML == dropZone.innerHTML);
+      const currentChar = this.removedChars.find((obj) => obj.value == dropZone.innerHTML);
+      console.log(this.removedChars);
+      console.log(dropZone.innerHTML);
+      console.log(currentChar);
 
       // Remove draggedChar from stack
-      console.log(this.stack.indexOf(draggedChar));
-      this.stack.splice(this.stack.indexOf(draggedChar), 1);
-      // this.stack.splice(this.index, 1);
+      console.log(draggedCharIndex);
+      this.stack.splice(draggedCharIndex, 1);
       this.removedChars.push(draggedChar);
 
-      // Put back currentChar to stack
-      const currentChar = this.removedChars.find(obj => obj.value === dropZone.innerHTML);
+      // Put back currentChar to stack if needed
       if (currentChar != null) {
         this.stack.push(currentChar);
         this.removedChars.splice(this.removedChars.indexOf(currentChar), 1);
       }
 
-      // Replace currentChar with draggedChar
-      dropZone.innerHTML = draggedChar.innerHTML;
+      // Show draggedChar
+      dropZone.innerHTML = draggedChar.value;
     },
   }
 };
@@ -351,68 +361,70 @@ export default {
 .main__infobox p {
   margin: 15px;
 }
+
 /* End Page */
 
 .mainPage {
-    margin-top: 150px;
-    padding: 1rem;
-    font-size: 20px;
-    border: 3px solid #b8b4fc;
-    margin-right: 30px;
-    cursor: pointer;
-    transition: 0, 8s;
-    background: #fff;
-    color: #b8b4fc;
-    transition: 0.8s;
+  margin-top: 150px;
+  padding: 1rem;
+  font-size: 20px;
+  border: 3px solid #b8b4fc;
+  margin-right: 30px;
+  cursor: pointer;
+  transition: 0, 8s;
+  background: #fff;
+  color: #b8b4fc;
+  transition: 0.8s;
 }
 
 .mainPage:hover {
-    color: #fff;
-    background: #b8b4fc;
+  color: #fff;
+  background: #b8b4fc;
 }
 
 .leaderBoard {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    margin: 0 auto;
-    padding: 0 1rem;
-    counter-reset: leaderboard;
-    width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 1rem;
+  counter-reset: leaderboard;
+  width: 50%;
 }
 
 .leaderBoard li {
-    counter-increment: leaderboard;
-    margin-bottom: .5rem;
-    display: flex;
-    align-items: center;
-    color: #4A4A4A;
+  counter-increment: leaderboard;
+  margin-bottom: .5rem;
+  display: flex;
+  align-items: center;
+  color: #4A4A4A;
 }
 
 .leaderBoard li::before {
-    content: counter(leaderboard);
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(77, 171, 247, 0.16);
-    color: #4DABF7;
-    padding: 1rem;
-    border-radius: 42px;
-    height: 42px;
-    width: 42px;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-right: .75rem;
+  content: counter(leaderboard);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(77, 171, 247, 0.16);
+  color: #4DABF7;
+  padding: 1rem;
+  border-radius: 42px;
+  height: 42px;
+  width: 42px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-right: .75rem;
 }
+
 .winnerMessage {
-    margin-top: 30px;
+  margin-top: 30px;
 }
+
 .textBoard {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: #4DABF7;
-}
-</style>
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #4DABF7;
+}</style>
