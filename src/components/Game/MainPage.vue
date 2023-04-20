@@ -265,6 +265,9 @@ export default {
       this.getGameState();
       if (this.isDone == 1) {
         clearInterval(intervalID);
+        this.hasGameEnded = true;
+        this.countScore();
+        this.getPlayersScore();
       }
     }, 500);
   },
@@ -319,6 +322,7 @@ export default {
         });
     },
     countScore() {
+      console.log('count');
       // Count sum of each letter of each row
       for (let i = 1; i < 6; i++) {
         const row = document.querySelectorAll(`.rack__${i}`);
