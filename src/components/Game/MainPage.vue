@@ -85,7 +85,7 @@
       </div>
     </div>
   </div>
-  <div v-if="hasGameEnded">
+  <div v-if="hasGameEnded && players[0]">
     <!-- EndPage -->
     <p class="winnerMessage">
       Congrats {{ players[0].name }} won! He finished the game with {{ players[0].points }} points!
@@ -265,11 +265,24 @@ export default {
       this.getGameState();
       if (this.isDone == 1) {
         clearInterval(intervalID);
+        this.hasGameEnded = true;
+        this.countScore();
+        this.getPlayersScore();
       }
     }, 500);
   },
 
   methods: {
+    endGame() {
+      if (this.isDone != 1) {
+        const gameId = store.getters.gameId;
+        axios.get(`https://api.bklm.be/endGame.php?gameId=${gameId}`).catch(error => { console.log(error); });
+        this.hasGameEnded = true;
+        clearInterval(this.timerInterval);
+        this.countScore();
+        this.getPlayersScore();
+      }
+    },
     getGameState() {
       const gameId = store.getters.gameId;
 
@@ -277,7 +290,6 @@ export default {
         .then(res => {
           // Game is done
           this.isDone = res.data.isDone;
-          this.endGame();
         })
         .catch(error => {
           console.log(error);
@@ -309,13 +321,8 @@ export default {
           console.log(error);
         });
     },
-    endGame() {
-      this.hasGameEnded = true;
-      clearInterval(this.timerInterval);
-      this.countScore();
-      this.getPlayersScore();
-    },
     countScore() {
+      console.log('count');
       // Count sum of each letter of each row
       for (let i = 1; i < 6; i++) {
         const row = document.querySelectorAll(`.rack__${i}`);
@@ -329,19 +336,21 @@ export default {
         });
 
         // Give won points to player
-        if (word.indexOf('_') == -1 && this.checkWord(word)) {
-          this.setScoreToDb(score, store.getters.currentPlayer.id);
-          console.log(score)
-        }
-        else {
-          // Give lost points to all other players
-          store.getters.players.forEach(player => {
-            if (player.id != store.getters.currentPlayer.id) {
-              this.setScoreToDb(score, player.id);
-              console.log(score)
+        if (!word.includes('_')) {
+          if (this.checkWord(word)) {
+            this.setScoreToDb(score, store.getters.currentPlayer.id);
+            console.log(score)
+          }
+          else {
+            // Give lost points to all other players
+            store.getters.players.forEach(player => {
+              if (player.id != store.getters.currentPlayer.id) {
+                this.setScoreToDb(score, player.id);
+                console.log(score)
 
-            }
-          });
+              }
+            });
+          }
         }
       }
 
@@ -430,8 +439,7 @@ export default {
       dropZone.innerHTML = draggedChar.value;
     },
   }
-
-}
+};
 </script>
 
 <style scoped>
@@ -439,43 +447,13 @@ export default {
   margin: 15px;
 }
 
-#buttonHome2 {
-  width: 200px;
-  margin-top: 20px;
-  padding: 10px;
-  font-size: 20px;
-  background-color: #C9FFD5;
-  border-radius: 5px;
-  border: 2px solid black;
-  text-decoration: none;
-  color: black;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-#buttonHome2:hover {
-  background-color: #FDFDBE;
-}
-
 .button {
-  width: 200px;
+  background-color: #888;
+  border: #888 solid 1px;
+  color: #000;
+  display: inline-block;
   padding: 10px;
-  font-size: 20px;
-  background-color: #C9FFD5;
-  border-radius: 5px;
-  border: 2px solid black;
   text-decoration: none;
-  color: black;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #FDFDBE;
 }
 
 /* Deck */
@@ -497,17 +475,15 @@ export default {
 
 /* Infobox */
 .main__infobox {
-  background-color: #B1AFFF;
-  border: #000 solid 1.5px;
+  background-color: #C8FFD4;
+  border: #000 solid 1px;
   margin-bottom: 15px;
   padding: 15px;
   text-align: center;
 }
 
 .main__infobox p {
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
+  margin: 15px;
 }
 
 /* End Page */
@@ -547,10 +523,7 @@ export default {
   margin-bottom: .5rem;
   display: flex;
   align-items: center;
-  color: #242424;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
+  color: #4A4A4A;
 }
 
 .leaderBoard li::before {
@@ -559,8 +532,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #2c3e5056;
-  color: #b8b4fc;
+  background-color: rgba(77, 171, 247, 0.16);
+  color: #4DABF7;
   padding: 1rem;
   border-radius: 42px;
   height: 42px;
@@ -578,13 +551,5 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
   color: #4DABF7;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-#border .textBoard {
-  font-size: 25px;
-  font-weight: bold;
 }
 </style>
