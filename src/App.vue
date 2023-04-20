@@ -5,8 +5,10 @@
       src="https://files.freemusicarchive.org/storage-freemusicarchive-org/tracks/hIFJ4757SD1qbJ9veZoewTr0ihjJjpkMAOJZr1G6.mp3?download=1&name=Eggy%20Toast%20-%20Lose%20your%20head.mp3.mp3"
       loop ref="audio">
     </audio>
-    <button id="homeBtn" class="btn" @click="goHome">Home</button>
-    <button id="muteBtn" class="btn" @click="toggleAudio">{{ isPlaying ? 'Sound On' : 'Sound Off' }}</button>
+  </div>
+  <div id="buttons">
+    <router-link class="button" id="buttonHome" to="/">Home</router-link>
+    <button id="muteBtn" class="btn" @click="toggleAudio">{{ isPlaying ? 'Sound Off' : 'Sound On' }}</button>
   </div>
 </template>
 
@@ -126,7 +128,11 @@ nav a.router-link-exact-active {
   background-color: #FDFDBE;
 }
 
-.btn {
+
+/* button to return to home page */
+#buttonHome {
+  margin-top: 10px;
+  margin-left: 10px;
   padding: 5px;
   font-size: 15px;
   background-color: #C9FFD5;
@@ -145,14 +151,30 @@ nav a.router-link-exact-active {
   cursor: pointer;
 }
 
-#homeBtn {
-  margin-top: 10px;
-  margin-left: 10px;
+#buttonHome:hover {
+  background-color: #FDFDBE;
 }
 
+
+/* sound button mute*/
 #muteBtn {
   margin-top: 10px;
-  margin-left: 120px;
+  margin-left: 130px;
+  padding: 5px;
+  font-size: 15px;
+  background-color: #C9FFD5;
+  border-radius: 5px;
+  border: 2px solid black;
+  width: 100px;
+  text-decoration: none;
+  color: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 #muteBtn:hover,
@@ -188,6 +210,7 @@ nav a.router-link-exact-active {
   text-align: justify;
   line-height: 1.3;
   font-family: Arial, sans-serif;
+
 }
 
 #border p {

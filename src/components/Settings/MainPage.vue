@@ -77,3 +77,63 @@ h1 {
 }
 </style>
   
+<style>
+.rules-page {
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    text-align: justify;
+    background-color: #B9E9FC;
+    height: 100%;
+}
+
+/* h1 {
+    text-align: center;
+    font-size: 90px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    color: #B2B0FF;
+} */
+
+#border {
+    background-color: #B2B0FF;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+p {
+    margin-bottom: 20px;
+    padding-left: 20px;
+    text-indent: -20px;
+    text-indent: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+p:first-of-type {
+    padding-top: 0;
+}
+
+p:last-of-type {
+    margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+    .rules-page {
+        padding: 20px;
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+}
+
+h1 {
+    text-align: center;
+}
+</style>
+  

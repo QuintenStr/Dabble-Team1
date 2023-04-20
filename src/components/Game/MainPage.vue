@@ -430,7 +430,8 @@ export default {
       dropZone.innerHTML = draggedChar.value;
     },
   }
-};
+
+}
 </script>
 
 <style scoped>
@@ -438,13 +439,43 @@ export default {
   margin: 15px;
 }
 
-.button {
-  background-color: #888;
-  border: #888 solid 1px;
-  color: #000;
-  display: inline-block;
+#buttonHome2 {
+  width: 200px;
+  margin-top: 20px;
   padding: 10px;
+  font-size: 20px;
+  background-color: #C9FFD5;
+  border-radius: 5px;
+  border: 2px solid black;
   text-decoration: none;
+  color: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#buttonHome2:hover {
+  background-color: #FDFDBE;
+}
+
+.button {
+  width: 200px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: #C9FFD5;
+  border-radius: 5px;
+  border: 2px solid black;
+  text-decoration: none;
+  color: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #FDFDBE;
 }
 
 /* Deck */
@@ -466,15 +497,17 @@ export default {
 
 /* Infobox */
 .main__infobox {
-  background-color: #C8FFD4;
-  border: #000 solid 1px;
+  background-color: #B1AFFF;
+  border: #000 solid 1.5px;
   margin-bottom: 15px;
   padding: 15px;
   text-align: center;
 }
 
 .main__infobox p {
-  margin: 15px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 /* End Page */
@@ -514,7 +547,10 @@ export default {
   margin-bottom: .5rem;
   display: flex;
   align-items: center;
-  color: #4A4A4A;
+  color: #242424;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .leaderBoard li::before {
@@ -523,8 +559,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(77, 171, 247, 0.16);
-  color: #4DABF7;
+  background-color: #2c3e5056;
+  color: #b8b4fc;
   padding: 1rem;
   border-radius: 42px;
   height: 42px;
@@ -542,5 +578,13 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
   color: #4DABF7;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#border .textBoard {
+  font-size: 25px;
+  font-weight: bold;
 }
 </style>
