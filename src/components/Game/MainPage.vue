@@ -80,8 +80,8 @@
         </div>
       </div>
       <div class="deck__stack" ref="deck__stack">
-        <div v-for="char in stack" v-html="`${char.value} : ${char.score}`" :id="char.id" class="stack__char"
-          :key="char.id" :ref="char.id" draggable="true" @dragstart="dragChar"></div>
+        <div v-for="char in stack" v-html="`${char.value} : ${char.score}`" :id="`${char.id}`"
+          class="stack__char" :key="char" draggable="true" @dragstart="dragChar"></div>
       </div>
     </div>
   </div>
@@ -236,7 +236,6 @@ export default {
       timeCompleted: null,
       winnerPoints: null,
       removedChars: [],
-      index: null,
     };
   },
 
@@ -295,11 +294,12 @@ export default {
       this.hasGameEnded = true;
     },
     generateStack() {
-      // Generates a stack of random letter-objects
+      // Generates a stack of 20 random letter-objects
       const stack = [];
       for (let i = 0; i < 20; i++) {
-        const char = this.chars[Math.floor(Math.random() * this.chars.length)];
-        char.id = `${i}_${char.value}`;
+        // ChatGPT
+        let char = Object.assign({}, this.chars[Math.floor(Math.random() * this.chars.length)]);
+        char.id = `char-${i}`;
         stack.push(char);
       }
       return stack;
@@ -310,26 +310,35 @@ export default {
     },
     dropChar(e) {
       e.preventDefault();
-      let charId = e.dataTransfer.getData('text/plain');
-      let draggedChar = document.getElementById(charId);
+      let draggedCharId = e.dataTransfer.getData('text/plain');
+      // let draggedChar = document.getElementById(draggedcharId);
+      console.log(draggedCharId);
+      console.log(this.stack);
+      const draggedChar = this.stack.find((obj) => obj.id == draggedCharId);
+
       if (e.target.innerHTML == draggedChar.innerHTML) return;
+
+      const draggedCharIndex = this.stack.findIndex((obj) => obj.id == draggedCharId);
       const dropZone = e.target;
+      // const currentChar = this.removedChars.find((obj) => obj.innerHTML == dropZone.innerHTML);
+      const currentChar = this.removedChars.find((obj) => obj.value == dropZone.innerHTML);
+      console.log(this.removedChars);
+      console.log(dropZone.innerHTML);
+      console.log(currentChar);
 
       // Remove draggedChar from stack
-      console.log(this.stack.indexOf(draggedChar));
-      this.stack.splice(this.stack.indexOf(draggedChar), 1);
-      // this.stack.splice(this.index, 1);
+      console.log(draggedCharIndex);
+      this.stack.splice(draggedCharIndex, 1);
       this.removedChars.push(draggedChar);
 
-      // Put back currentChar to stack
-      const currentChar = this.removedChars.find(obj => obj.value === dropZone.innerHTML);
+      // Put back currentChar to stack if needed
       if (currentChar != null) {
         this.stack.push(currentChar);
         this.removedChars.splice(this.removedChars.indexOf(currentChar), 1);
       }
 
-      // Replace currentChar with draggedChar
-      dropZone.innerHTML = draggedChar.innerHTML;
+      // Show draggedChar
+      dropZone.innerHTML = draggedChar.value;
     },
   }
 };
