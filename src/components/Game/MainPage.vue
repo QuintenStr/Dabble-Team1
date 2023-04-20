@@ -296,12 +296,12 @@ export default {
         clearInterval(this.timerInterval);
       }
     },
-    setScoreToDb() {
+    setScoreToDb(score) {
       // Get player id from store
       const playerId = store.getters.currentPlayer.id;
 
       // Update player points
-      axios.get(`https://bklm.be/api/setPlayerPoints.php?points=${20}&playerId=${playerId}`)
+      axios.get(`https://bklm.be/api/setPlayerPoints.php?points=${score}&playerId=${playerId}`)
         .catch(error => {
           console.log(error);
         });
