@@ -3,8 +3,7 @@
         <h1>Rules</h1>
         <div id="border">
             <p>
-                <span>- 2-4 spelers.</span><br>
-                <span>- 20 tegels waarmee je zo snel mogelijk 5 woorden moet maken.</span><br>
+                <span>- Er zijn 20 tegels waarmee je zo snel mogelijk 5 woorden moet maken.</span><br>
                 <span>- Een timer van standaard 3 min.</span><br>
                 <span>- Kiezen in welke taal je gaat spelen voor begin van de spel. Je moet wel in 2 talen kunnen spelen
                     (NL/EN).</span><br>
