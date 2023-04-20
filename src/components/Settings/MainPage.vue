@@ -25,7 +25,12 @@ export default {
             const bgcolor = `rgb(${+Math.random() * 255}, ${+Math.random() * 255}, ${+Math.random() * 255})`;
             const lower = document.querySelector('.body-container');
             const body = document.querySelector("body");
+            const header = document.getElementById("BckgColor");
+            const fixcolor = document.querySelector("body");
+            const generalColor = 'rgb(185, 233, 252)';
+            fixcolor.style.backgroundColor = generalColor;
             body.style.backgroundColor = bgcolor;
+            header.style.backgroundColor = bgcolor;
             lower.style.backgroundColor = bgcolor;
             console.log('button');
             console.log(body);
@@ -34,8 +39,10 @@ export default {
             const generalColor = 'rgb(185, 233, 252)';
             const lower = document.querySelector('.body-container');
             const body = document.querySelector("body");
+            const header = document.getElementById("BckgColor");
             body.style.backgroundColor = generalColor;
             lower.style.backgroundColor = generalColor;
+            header.style.backgroundColor = generalColor;
         },
     }
 }
@@ -43,7 +50,6 @@ export default {
 </script>
   
 <style scoped>
-
 #volume-slider-container {
     padding: 20px;
 }
@@ -65,9 +71,9 @@ export default {
 .button1:hover {
     background-color: #FDFDBE;
 }
+
 h1 {
     margin-bottom: 50px;
 }
-
 </style>
   

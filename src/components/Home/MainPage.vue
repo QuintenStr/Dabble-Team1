@@ -1,5 +1,7 @@
 <template>
+  
     <div class="body-container">
+      <div id="BckgColor">
         <h1>Dabble</h1>
         <div id="buttons">
             <router-link class="button" to="/create">Create game</router-link>
@@ -7,6 +9,8 @@
             <router-link class="button" to="/rules">Rules</router-link>
             <router-link class="button" to="/settings">Settings</router-link>
         </div>
+        </div>
+        
     </div>
 </template>
 

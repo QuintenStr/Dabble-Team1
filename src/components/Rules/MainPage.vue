@@ -20,18 +20,41 @@
                 <span>- Apostrof tegels: 2</span>
             </p>
         </div>
-        <button class="button2">I accept</button>
+        <button class="button2" v-on:click="acceptRules">I accept</button>
     </div>
 </template>
   
 <script>
-
-document.getElementById(".button2").onclick;
+export default {
+    methods: {
+        acceptRules() {
+            document.querySelector(".button2").innerHTML = "Thank you for accepting!"
+        }
+    }
+}
 
 
 </script>
   
 <style scoped>
+    .button2 {
+        margin-top: 30px;
+        padding: 10px;
+        font-size: 30px;
+        background-color: #C9FFD5;
+        border-radius: 5px;
+        border: 2px solid black;
+        width: 300px;
+        text-decoration: none;
+        color: black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+    }
+
+    .button2:hover {
+        background-color: #FDFDBE;
+    }
+
 @media (max-width: 600px) {
     .rules-page {
         padding: 20px;
