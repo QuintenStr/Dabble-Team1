@@ -266,9 +266,8 @@ export default {
         clearInterval(this.timerInterval);
       }
     },
-    setScoreToDb(score) {
+    setScoreToDb(score, playerId) {
       // Get player id from store
-      const playerId = store.getters.currentPlayer.id;
 
       // Update player points
       axios.get(`https://api.bklm.be/setPlayerPoints.php?points=${score}&playerId=${playerId}`)
@@ -289,8 +288,9 @@ export default {
         });
     },
     endGame() {
+      const playerId = store.getters.currentPlayer.id;
       clearInterval(this.timerInterval);
-      this.setScoreToDb();
+      this.setScoreToDb(20, playerId);
       this.getPlayersScore();
       this.hasGameEnded = true;
     },
