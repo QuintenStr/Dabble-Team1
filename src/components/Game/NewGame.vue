@@ -26,13 +26,16 @@
     <div class="waitingPlayers" v-else>
         <h1>Party {{ game.id }}</h1>
         <div class="players">
-            <ul>
-                <li v-for="(player, i) in game.players" :key="player.id">
-                    Player {{ i + 1 }}: {{ player.name }}
-                </li>
-            </ul>
+            <div id="border">
+                <ul>
+                    <li v-for="(player, i) in game.players" :key="player.id">
+                        Player {{ i + 1 }}: {{ player.name }}
+                    </li>
+                </ul>
+                <button class="button" v-on:click="launchGame()">START GAME</button>
+
+            </div>
         </div>
-        <button v-on:click="launchGame()">START GAME</button>
     </div>
 </template>
 
@@ -99,8 +102,37 @@ export default {
 
 
 <style scoped>
-#border {
+.waitingPlayers h1 {
+    padding: 40px;
+}
+
+.createGame #border{
     margin-top: -30px;
+}
+
+.waitingPlayers #border {
+    margin-top: -20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 230px;
+    width: 200px;
+}
+.players li {
+    padding: 10px;
+    text-indent: -20px;
+    text-indent: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.button {
+    margin-bottom: -10px;
+    margin-top: 30px;
+    font-size: 15px;
+    width: 150px;
 }
 
 .error {

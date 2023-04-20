@@ -8,7 +8,8 @@
                 <span>- Eerste die 5 woorden kan maken met de tegeld die hij heeft stopt de timer, dan stopt iedereen met
                     het spel en telt iedereen zijn
                     punten of als de timer op is, telt iedereen zijn punten ook op.</span><br>
-                <span>- Wanneer er geen winnaar is met 5 woorden, zal elke speler zijn overige woorden optellen en die som zal dan bij elke andere speler gaan.</span><br>
+                <span>- Wanneer er geen winnaar is met 5 woorden, zal elke speler zijn overige woorden optellen en die som
+                    zal dan bij elke andere speler gaan.</span><br>
                 <span>- Andere spelers kunnen jouw woorden zien.</span><br>
                 <span>- Woorden tegels: 142</span><br>
                 <span>- Blank tegels: 2</span><br>
@@ -80,3 +81,4 @@ h1 {
     text-align: center;
 }
 </style>
+  

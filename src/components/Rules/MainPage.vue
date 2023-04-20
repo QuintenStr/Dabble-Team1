@@ -10,8 +10,7 @@
                 <span>- Eerste die alle woorden heeft stopt de timer, dan stopt iedereen met het spel en telt iedereen
                     zijn
                     punten of als de timer op is, telt iedereen zijn punten ook op.</span><br>
-                <span>- Wanneer er geen winnaar is met 5 woorden, zal elke speler zijn overige woorden optellen en die
-                    som
+                <span>- Wanneer er geen winnaar is met 5 woorden, zal elke speler zijn overige woorden optellen en die som
                     zal dan bij elke andere speler gaan.</span><br>
                 <span>- Andere spelers kunnen jouw woorden zien.</span><br>
                 <span>- Woorden tegels: 142</span><br>
@@ -30,10 +29,22 @@
 </script>
   
 <style scoped>
-.button {
-    position: fixed;
-    bottom: 0;
-    right: 20px;
+.button2 {
+    margin-top: 10px;
+    padding: 5px;
+    font-size: 20px;
+    background-color: #C9FFD5;
+    border-radius: 5px;
+    border: 2px solid black;
+    width: 200px;
+    text-decoration: none;
+    color: black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.button2:hover {
+    background-color: #FDFDBE;
 }
 
 @media (max-width: 600px) {
