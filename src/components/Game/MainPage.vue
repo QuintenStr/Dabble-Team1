@@ -88,7 +88,7 @@
   <div v-if="hasGameEnded">
     <!-- EndPage -->
     <p class="winnerMessage">
-      Congrats {{ winner }}, you won! You finished the game in {{ timeCompleted }} minute(s) and with {{ winnerPoints }}
+      Congrats {{ players[0].name }} won! You finished the game in {{ timeCompleted }} minute(s) with {{ players[0].points }}
       points!
     </p>
     <p class="textBoard">Leaderboard:</p>
@@ -291,8 +291,9 @@ export default {
     },
     endGame() {
       const playerId = store.getters.currentPlayer.id;
+      const points = Math.floor(Math.random() * 30) + 1;
       clearInterval(this.timerInterval);
-      this.setScoreToDb(20, playerId);
+      this.setScoreToDb(points, playerId);
       this.getPlayersScore();
       this.hasGameEnded = true;
     },
