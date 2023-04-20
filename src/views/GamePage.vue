@@ -1,6 +1,6 @@
 <template>
-  <GamePage v-if="false" />
-  <TestPage />
+  <GamePage />
+  <TestPage v-if="false" />
 </template>
   
 <script>
