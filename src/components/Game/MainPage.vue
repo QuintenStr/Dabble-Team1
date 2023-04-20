@@ -88,9 +88,7 @@
   <div v-if="hasGameEnded">
     <!-- EndPage -->
     <p class="winnerMessage">
-      Congrats {{ players[0].name }} won! You finished the game in {{ timeCompleted }} minute(s) with {{ players[0].points
-      }}
-      points!
+      Congrats {{ players[0].name }} won! He finished the game with {{ players[0].points }} points!
     </p>
     <p class="textBoard">Leaderboard:</p>
     <ol class="leaderBoard">
@@ -238,6 +236,7 @@ export default {
       timeCompleted: null,
       winnerPoints: null,
       removedChars: [],
+      isDone: null,
     };
   },
 
@@ -264,7 +263,7 @@ export default {
 
     let intervalID = setInterval(() => {
       this.getGameState();
-      if (this.isStarted == 1) {
+      if (this.isDone == 1) {
         clearInterval(intervalID);
       }
     }, 500);
@@ -276,7 +275,9 @@ export default {
 
       axios.get(`https://api.bklm.be/gameState.php?gameId=${gameId}`)
         .then(res => {
-          console.log(res.data);
+          // Game is done
+          this.isDone = res.data.isDone;
+          this.endGame();
         })
         .catch(error => {
           console.log(error);
@@ -309,10 +310,10 @@ export default {
         });
     },
     endGame() {
-      const playerId = store.getters.currentPlayer.id;
-      const points = Math.floor(Math.random() * 30) + 1;
+      // const playerId = store.getters.currentPlayer.id;
+      // const points = Math.floor(Math.random() * 30) + 1;
       clearInterval(this.timerInterval);
-      this.setScoreToDb(points, playerId);
+      // this.setScoreToDb(points, playerId);
       this.getPlayersScore();
       this.hasGameEnded = true;
     },
