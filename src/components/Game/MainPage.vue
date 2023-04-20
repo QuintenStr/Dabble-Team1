@@ -301,7 +301,7 @@ export default {
       const playerId = store.getters.currentPlayer.id;
 
       // Update player points
-      axios.get(`https://bklm.be/api/setPlayerPoints.php?points=${score}&playerId=${playerId}`)
+      axios.get(`https://api.bklm.be/setPlayerPoints.php?points=${score}&playerId=${playerId}`)
         .catch(error => {
           console.log(error);
         });
@@ -310,7 +310,7 @@ export default {
       // Get player id from store
       const gameId = store.getters.gameId;
 
-      axios.get(`https://bklm.be/api/getPlayersScore.php?gameId=${gameId}}`)
+      axios.get(`https://api.bklm.be/getPlayersScore.php?gameId=${gameId}}`)
         .then(res => {
           store.commit('setPlayers', res.data.players);
         })
