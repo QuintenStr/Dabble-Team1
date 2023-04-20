@@ -9,72 +9,72 @@
       <p class="deck__player">You</p>
       <div class="deck__rack">
         <div class="rack__row">
-          <div class="rack__col rack__11" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__1" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
-          <div class="rack__col rack__12" ref="drop" @dragover.prevent @drop="dropChar">
-            __
-          </div>
-        </div>
-        <div class="rack__row">
-          <div class="rack__col rack__21" ref="drop" @dragover.prevent @drop="dropChar">
-            __
-          </div>
-          <div class="rack__col rack__22" ref="drop" @dragover.prevent @drop="dropChar">
-            __
-          </div>
-          <div class="rack__col rack__23" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__1" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
         </div>
         <div class="rack__row">
-          <div class="rack__col rack__31" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__2" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
-          <div class="rack__col rack__32" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__2" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
-          <div class="rack__col rack__33" ref="drop" @dragover.prevent @drop="dropChar">
-            __
-          </div>
-          <div class="rack__col rack__34" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__2" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
         </div>
         <div class="rack__row">
-          <div class="rack__col rack__41" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__3" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
-          <div class="rack__col rack__42" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__3" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
-          <div class="rack__col rack__43" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__3" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
-          <div class="rack__col rack__44" ref="drop" @dragover.prevent @drop="dropChar">
-            __
-          </div>
-          <div class="rack__col rack__45" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__3" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
         </div>
         <div class="rack__row">
-          <div class="rack__col rack__51" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__4" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
-          <div class="rack__col rack__52" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__4" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
-          <div class="rack__col rack__53" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__4" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
-          <div class="rack__col rack__54" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__4" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
-          <div class="rack__col rack__55" ref="drop" @dragover.prevent @drop="dropChar">
+          <div class="rack__col rack__4" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
-          <div class="rack__col rack__56" ref="drop" @dragover.prevent @drop="dropChar">
+        </div>
+        <div class="rack__row">
+          <div class="rack__col rack__5" ref="drop" @dragover.prevent @drop="dropChar">
+            __
+          </div>
+          <div class="rack__col rack__5" ref="drop" @dragover.prevent @drop="dropChar">
+            __
+          </div>
+          <div class="rack__col rack__5" ref="drop" @dragover.prevent @drop="dropChar">
+            __
+          </div>
+          <div class="rack__col rack__5" ref="drop" @dragover.prevent @drop="dropChar">
+            __
+          </div>
+          <div class="rack__col rack__5" ref="drop" @dragover.prevent @drop="dropChar">
+            __
+          </div>
+          <div class="rack__col rack__5" ref="drop" @dragover.prevent @drop="dropChar">
             __
           </div>
         </div>
@@ -310,12 +310,84 @@ export default {
         });
     },
     endGame() {
-      // const playerId = store.getters.currentPlayer.id;
-      // const points = Math.floor(Math.random() * 30) + 1;
-      clearInterval(this.timerInterval);
-      // this.setScoreToDb(points, playerId);
-      this.getPlayersScore();
       this.hasGameEnded = true;
+      clearInterval(this.timerInterval);
+      this.countScore();
+      this.getPlayersScore();
+    },
+    countScore() {
+      // Count sum of each letter of each row
+      for (let i = 1; i < 6; i++) {
+        const row = document.querySelectorAll(`.rack__${i}`);
+        let word = '';
+        let score = 0;
+
+        row.forEach(div => {
+          let letter = div.innerHTML;
+          word += letter;
+          score += this.getLetterScore(letter);
+        });
+
+        // Give won points to player
+        if (word.indexOf('_') == -1 && this.checkWord(word)) {
+          this.setScoreToDb(score, store.getters.currentPlayer.id);
+          console.log(score)
+        }
+        else {
+          // Give lost points to all other players
+          store.getters.players.forEach(player => {
+            if (player.id != store.getters.currentPlayer.id) {
+              this.setScoreToDb(score, player.id);
+              console.log(score)
+
+            }
+          });
+        }
+      }
+
+      // Get letters from stack
+      let score = 0;
+      console.log(this.stack)
+      this.stack.forEach(char => {
+        // Give lost points to all other players
+        score += this.getLetterScore(char.value);
+        store.getters.players.forEach(player => {
+          if (player.id != store.getters.currentPlayer.id) {
+            this.setScoreToDb(score, player.id);
+            console.log(score)
+          }
+        });
+      });
+    },
+    getLetterScore(letter) {
+      let score = 0;
+      if ('eaionrtlsu'.indexOf(letter) != -1) {
+        score += 3;
+      }
+      else if ('dg'.indexOf(letter) != -1) {
+        score += 6;
+      }
+      else if ('bcmp'.indexOf(letter) != -1) {
+        score += 9;
+      }
+      else if ('fhvwy'.indexOf(letter) != -1) {
+        score += 12;
+      }
+      else if ('k'.indexOf(letter) != -1) {
+        score += 15;
+      }
+      else if ('jx'.indexOf(letter) != -1) {
+        score += 24;
+      }
+      else if ('qz'.indexOf(letter) != -1) {
+        score += 30;
+      }
+      return score;
+    },
+    async checkWord(word, lang) {
+      // Checks to see if the word exists or not
+      const resp = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+      return resp.status == 200 ? true : false;
     },
     generateStack() {
       // Generates a stack of 20 random letter-objects
@@ -335,23 +407,15 @@ export default {
     dropChar(e) {
       e.preventDefault();
       let draggedCharId = e.dataTransfer.getData('text/plain');
-      // let draggedChar = document.getElementById(draggedcharId);
-      console.log(draggedCharId);
-      console.log(this.stack);
       const draggedChar = this.stack.find((obj) => obj.id == draggedCharId);
 
       if (e.target.innerHTML == draggedChar.innerHTML) return;
 
       const draggedCharIndex = this.stack.findIndex((obj) => obj.id == draggedCharId);
       const dropZone = e.target;
-      // const currentChar = this.removedChars.find((obj) => obj.innerHTML == dropZone.innerHTML);
       const currentChar = this.removedChars.find((obj) => obj.value == dropZone.innerHTML);
-      console.log(this.removedChars);
-      console.log(dropZone.innerHTML);
-      console.log(currentChar);
 
       // Remove draggedChar from stack
-      console.log(draggedCharIndex);
       this.stack.splice(draggedCharIndex, 1);
       this.removedChars.push(draggedChar);
 
@@ -362,6 +426,7 @@ export default {
       }
 
       // Show draggedChar
+      console.log(this.stack);
       dropZone.innerHTML = draggedChar.value;
     },
   }
