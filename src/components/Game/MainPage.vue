@@ -85,7 +85,7 @@
       </div>
     </div>
   </div>
-  <div v-if="hasGameEnded">
+  <div v-if="hasGameEnded && players[0]">
     <!-- EndPage -->
     <p class="winnerMessage">
       Congrats {{ players[0].name }} won! He finished the game with {{ players[0].points }} points!
@@ -270,6 +270,16 @@ export default {
   },
 
   methods: {
+    endGame() {
+      if (this.isDone != 1) {
+        const gameId = store.getters.gameId;
+        axios.get(`https://api.bklm.be/endGame.php?gameId=${gameId}`).catch(error => { console.log(error); });
+        this.hasGameEnded = true;
+        clearInterval(this.timerInterval);
+        this.countScore();
+        this.getPlayersScore();
+      }
+    },
     getGameState() {
       const gameId = store.getters.gameId;
 
@@ -277,7 +287,6 @@ export default {
         .then(res => {
           // Game is done
           this.isDone = res.data.isDone;
-          this.endGame();
         })
         .catch(error => {
           console.log(error);
@@ -309,12 +318,6 @@ export default {
           console.log(error);
         });
     },
-    endGame() {
-      this.hasGameEnded = true;
-      clearInterval(this.timerInterval);
-      this.countScore();
-      this.getPlayersScore();
-    },
     countScore() {
       // Count sum of each letter of each row
       for (let i = 1; i < 6; i++) {
@@ -329,19 +332,21 @@ export default {
         });
 
         // Give won points to player
-        if (word.indexOf('_') == -1 && this.checkWord(word)) {
-          this.setScoreToDb(score, store.getters.currentPlayer.id);
-          console.log(score)
-        }
-        else {
-          // Give lost points to all other players
-          store.getters.players.forEach(player => {
-            if (player.id != store.getters.currentPlayer.id) {
-              this.setScoreToDb(score, player.id);
-              console.log(score)
+        if (!word.includes('_')) {
+          if (this.checkWord(word)) {
+            this.setScoreToDb(score, store.getters.currentPlayer.id);
+            // console.log(score)
+          }
+          else {
+            // Give lost points to all other players
+            store.getters.players.forEach(player => {
+              if (player.id != store.getters.currentPlayer.id) {
+                this.setScoreToDb(score, player.id);
+                // console.log(score)
 
-            }
-          });
+              }
+            });
+          }
         }
       }
 
