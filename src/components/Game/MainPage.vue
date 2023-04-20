@@ -90,12 +90,14 @@
     <p class="winnerMessage">
       Congrats {{ players[0].name }} won! He finished the game with {{ players[0].points }} points!
     </p>
-    <p class="textBoard">Leaderboard:</p>
-    <ol class="leaderBoard">
-      <li v-for="(player, i) in players" :key="i" :class="`p${i + 1}`">Name: {{ player.name }} | Score: {{ player.points
-      }}
-      </li>
-    </ol>
+    <div id="border">
+      <p class="textBoard">Leaderboard:</p>
+      <ol class="leaderBoard">
+        <li v-for="(player, i) in players" :key="i" :class="`p${i + 1}`">Name: {{ player.name }} | Score: {{ player.points
+        }}
+        </li>
+      </ol>
+    </div>
     <p class="remainingTime"></p>
   </div>
 </template>
@@ -577,9 +579,8 @@ export default {
 .textBoard {
   margin-top: 10px;
   margin-bottom: 10px;
-  color: #4DABF7;
   padding: 10px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
 }
 
